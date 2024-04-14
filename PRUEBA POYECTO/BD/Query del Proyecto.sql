@@ -100,6 +100,8 @@ REFERENCES Ubicacion(IdUbicacion);
 -------------------------------INSERTS---------------------------------------
 
 ---UBICACION---
+
+
 INSERT INTO Ubicacion (Provincia) VALUES ('San José');
 INSERT INTO Ubicacion (Provincia) VALUES ('Alajuela');
 INSERT INTO Ubicacion (Provincia) VALUES ('Cartago');
@@ -122,6 +124,81 @@ INSERT INTO Sede (IdUbicacion, NombreSede) VALUES (2, 'Sede Interuniversitaria d
 INSERT INTO Sede (IdUbicacion, NombreSede) VALUES (3, 'Sede Regional del Atlántico');--8
 
 ---CARRERA---
+--Sede Occidente--
+
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ciencias de la Educación Inicial', 1, '134');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ciencias de la Eduación Prescolar con Concentración en Inglés', 1, '132');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ciencias de la Eduación Primaria(Bachillerato Desconcentrado)', 1, '130');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ciencias de la Educación Primaria con concentración Inglés', 1, '130');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Derecho (Bachillerato y Licenciatura desconcentrados) plan 3', 1, '173');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Derecho (Bachillerato y Licenciatura desconcentrados) plan 4', 1, '170');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Dirección de Empresas (Bachillerato y Licenciatura desconcentrados)', 1, '174');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Diseño Gráfico (Bachillerato y Licenciatura desconcentrados)', 1, '172');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Diseño Plástico', 1, '444');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Enseñanza del Castellano y Literatura', 1, '139');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Enseñanza de los Estudios Sociales y la Educación Cívica', 1, '143');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Enseñanza del Inglés', 1, '165');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Enseñanza de las Música', 1, '171');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Enseñanza de las Matemáticas (Bachillerato y Licenciatura desconcentrados. Salida lateral profesorado)', 1, '167');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Gestión de los Recursos Naturales', 1, '129');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Informática Empresarial', 1, '140');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ingeniería Industrial (Licenciatura desconcentrada)', 1, '176');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Psicología (Bachillerato y Licenciatura desconcentrados)', 1, '182');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Trabajo Social', 1, '177');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Gestión Integral del Recurso Hídrico', 1, '139');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Enseñanza de las Ciencias Naturales (Salida lateral Profesorado. Bachillerato desconcentrado)', 1, '141');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Laboratorista Químico', 1, '172');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Turismo Ecológico y Gestión Ecoturística (Bachillerato Desconcentrado)', 1, '177');
+
+
+--Sede Guanacaste--
+
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Administración Aduanera y Comercio Exterior (Diplomado y Bachillerato desconcentrados) plan 1', 2, '261');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Administración Aduanera y Comercio Exterior (Diplomado y Bachillerato desconcentrados) plan 3', 2, '170');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Agronomía (Bachillerato y Licenciatura desconcentrados)', 2, '179');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ciencias de la Educación Primaria con concentración Inglés (Bachillerato desconcentrado)', 2, '130');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ciencias de la Educación Inicial', 2, '134');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Derecho (Bachillerato y Licenciatura desconcentrados) plan 3', 2, '173');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Derecho (Bachillerato y Licenciatura desconcentrados) plan 4', 2, '170');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Dirección de Empresas (Bachillerato y Licenciatura desconcentrados)', 2, '174');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Educación Preescolar (Bachillerato y Licenciatura desconcentrados)', 2, '175');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Educación Primaria (salida lateral Profesorado. Bachillerato y Licenciatura desconcentrados)', 2, '179');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ciencias de la Educación Primaria', 2, '130');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Informática Empresarial', 2, '140');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ingeniería Eléctrica (desconcentrados I y II año de la carrera de Bachillerato. Profundización en Electrónica, Telecomunicaciones y Sistemas de Energía)', 2, '548');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ingeniería Civil (Desconcentrado I y II año de carrera)', 2, '173');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ingeniería de Alimentos (Licenciatura desconcentrada)', 2, '176');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Inglés (Bachillerato desconcentrado) plan 2', 2, '136');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Inglés (Bachillerato desconcentrado) plan 3', 2, '140');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Psicología (Bachillerato y Licenciatura desconcentrados)', 2, '182');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Salud Ambiental', 2, '172');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Turismo Ecológico y Gestión Ecoturística', 2, '177');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Contaduría Pública (Bachillerato desconcentrado)', 2, '173');
+
+--Sede Caribe--
+
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Administración Aduanera y Comercio Exterior (Diplomado y Bachillerato desconcentrados) plan 1', 3, '261');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Administración Aduanera y Comercio Exterior (Diplomado y Bachillerato desconcentrados) plan 3', 3, '170');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ciencias de la Educación Preescolar con concentración Inglés (Bachillerato desconcentrado)', 3, '132');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Contaduría Pública (Bachillerato y Licenciatura desconcentrados)', 3, '173');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Dirección de Empresas (Bachillerato y Licenciatura desconcentrados)', 3, '174');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Informática Empresarial', 3, '140');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ingeniería Química (Licenciatura desconcentrada)', 3, '174');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Inglés (Bachillerato desconcentrado) plan 2', 3, '136');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Inglés (Bachillerato desconcentrado) plan 3', 3, '140');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Enseñanza del Inglés', 3, '135');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Turismo Ecológico y Gestión Ecoturística (Bachillerato desconcentrado)', 3, '177');
+
+--Sede Pacifico--
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Dirección de Empresas (Bachillerato y Licenciatura desconcentrados)', 4, '174');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Enseñanza del Inglés (salida lateral Profesorado. Bachillerato desconcentrado)', 4, '142');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Informática Empresarial', 4, '140');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Informática y Tecnología Multimedia', 4, '167');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ingeniería Eléctrica (desconcentrado I y II año de la carrera de Bachillerato. Profundización en Electrónica, Telecomunicaciones y Sistemas de Energía)', 4, '548');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Inglés con Formación en Gestión Empresarial', 4, '170');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Gestión Cultural', 4, '140');
+INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Ingeniería Electromecánica Industrial', 4, '160');
+
 --Sede Sur--
 INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Biología', 5, '180');
 INSERT INTO Carrera (Nombre, idSede, Creditos) VALUES ('Física', 5, '168');
