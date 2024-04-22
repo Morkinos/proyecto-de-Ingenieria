@@ -1,0 +1,6 @@
+@apiUCRES_HostAddress = http://localhost:5073
+
+GET {{apiUCRES_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

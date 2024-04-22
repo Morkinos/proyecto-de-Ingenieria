@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\UCRES_Backend.props" />
-</Project>
