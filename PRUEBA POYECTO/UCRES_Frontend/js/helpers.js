@@ -1,4 +1,4 @@
-const fetchCoastersData = (...urls) => {
+const fetchAPIData = (...urls) => {
     const promises = urls.map(url => fetch(url).then(response => response.json()))
     return Promise.all(promises)
 }
@@ -12,13 +12,22 @@ const getCoastersByYear = (coasters, years) => {
     const coastersByYear = years.map(yearsRange => {
         const [from, to] = yearsRange.split('-')
         return coasters.filter(eachCoaster => eachCoaster.year >= from && eachCoaster.year <= to).length
-    })
+    })  
     return coastersByYear
 }
 
 const updateChartData = (chartId, data, label) => {
     const chart = Chart.getChart(chartId)
     chart.data.datasets[0].data = data
-    chart.data.datasets[0].label = label
+    // chart.data.datasets[0].label = [label]
+    chart.data.labels = label
+
     chart.update()
 }
+
+function redireccionarAGraficos() {
+    // Redirige a la página "graficos.html"
+    window.location.href = "graficos.html";
+}
+
+

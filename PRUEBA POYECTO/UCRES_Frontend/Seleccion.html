@@ -37,7 +37,59 @@
                 <a class="btn" href="#"><button class="bttn">Inicio Sesion</button></a>
             </header>
         </header>
-        <main></main>
+        <main>
+            <h1>Seleccione su grafico</h1>
+            <div>
+                <h2>Tipos de Graficos
+                    <select id="tipoGrafico">
+                        <option value="Radar">Radar</option>
+                        <option value="polarArea">Polar Area</option>
+                        <option value="Bar">Bar</option>
+                        <option value="Bubble">Bubble</option>
+                        <option value="Doughnut">Doughnut</option>
+                        <option value="Line">Line</option>
+                        <option value="scatter">scatter</option>
+                    </select>
+                </h2>
+            </div>
+            <section class="general container">
+               
+                <div class="general-1 ">
+
+                  <button class=" button-options container general-card" onclick="redireccionarAGraficos()" id=""
+                  >
+                    <div class="">
+                        <img src="img/GraficoBarras.png" alt="Logo de baras" class="imgoptions">
+                        <h3>Graficos de Matriculas</h3>
+                        <p>Esto es una prueba para ver si redirecciona</p>
+                    </div>
+                  </button>
+
+                  
+                  <button class=" button-options container general-card">
+                    <div class="">
+                        <img src="img/GraficoBarras.png" alt="Logo de baras" class="imgoptions">
+                        <h3>Solicitud de Grafico</h3>
+                        <p>Aca iria una mini descripcion del Grafico solicitado</p>
+                    </div>
+                  </button>
+                  
+                  <button class=" button-options container general-card">
+                    <div class="">
+                        <img src="img/GraficoBarras.png" alt="Logo de baras" class="imgoptions">
+                        <h3>Solicitud de Grafico</h3>
+                        <p>Aca iria una mini descripcion del Grafico solicitado</p>
+                    </div>
+                  </button>
+                  
+
+
+
+                </div>
+
+            </section>
+            
+        </main>
         <footer>
             <!-- place footer here -->
         </footer>
@@ -53,5 +105,7 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
+
+        <script src="js/helpers.js"></script>
     </body>
 </html>

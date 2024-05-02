@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using apiUCRES.Model;
 using Microsoft.EntityFrameworkCore;
 using apiUCRES.Contexto;
+using Microsoft.AspNetCore.Cors;
 
 namespace apiUCRES.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
+    [EnableCors("MyPolicy")]
     public class CarrerasController : Controller
     {
         public readonly DbContextUCRES _contexto;
@@ -18,6 +20,7 @@ namespace apiUCRES.Controllers
         }
 
         [HttpGet("Listado")]
+        [EnableCors("MyPolicy")]
         public async Task<List<Carrera>> Listado()
         {
             var list = await _contexto.Carreras.ToListAsync();

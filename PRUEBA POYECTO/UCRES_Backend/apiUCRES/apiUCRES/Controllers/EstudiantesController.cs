@@ -1,5 +1,6 @@
 ﻿using apiUCRES.Contexto;
 using apiUCRES.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace apiUCRES.Controllers
 {
         [ApiController]
         [Route("[Controller]")]
+        [EnableCors("MyPolicy")]
     public class EstudiantesController : Controller
     {
 
@@ -98,5 +100,15 @@ namespace apiUCRES.Controllers
 
             return mensaje;
         }
+
+        [HttpGet("ObtenerEstudianteRecidenciaxanno")]
+        public List<EstudiantesProvinciasxaño> Matriculaxsedexanio (string anno) {
+            var estudiantesPorProvincia = _contexto.EstudiantesProvinciasxaño
+            .FromSqlRaw($"EXEC ObtenerEstudiantesPorProvincia @Anio={anno}")
+            .ToList();
+
+            return estudiantesPorProvincia;
+        }
+
     }
 }

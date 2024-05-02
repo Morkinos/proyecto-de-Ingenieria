@@ -1,167 +1,58 @@
 Chart.defaults.color = '#fff'
 Chart.defaults.borderColor = '#444'
 
-function generarPokemon() {
-    const numeroAleatorio = Math.floor(Math.random() * 1025) + 1;
-    let url = `https://pokeapi.co/api/v2/pokemon/${numeroAleatorio}`;
+let tittle = document.title;
+let consulta = 'Seleccione su Grafico';
+let graficos = 'Graficas';
+
+
+function EstudiantesRecidenciaxanno() {
+    const anno = document.getElementById('AniosOptions');
+    let url = `https://localhost:7192/Estudiantes/ObtenerEstudianteRecidenciaxanno?anno=${anno.value}`
+    return url;
+}
+function ObternerCantMatriculasxSedexAnio() {
+    const anno = document.getElementById('OpcionesAnios');
+    let url = `https://localhost:7192/RegistroEstudiantes/ObternerCantMatriculasxSedexAnio?anio=${anno.value}`
     return url;
 }
 
+
 const printCharts = () => {
-    const url = generarPokemon();
-    
-    fetchCoastersData(url,'https://pokeapi.co/api/v2/type')
-        .then(([pokemonRamdom, tipos]) => {
-            renderModelsChart(pokemonRamdom,tipos)
-            renderFeaturesChart(pokemonRamdom,tipos)
-            renderYearsChart(pokemonRamdom)
-            enableEventHandlers(pokemonRamdom)
+
+    const urlEstudianteRecidenciaxanno = EstudiantesRecidenciaxanno();
+    const urlObternerCantMatriculasxSedexAnio= ObternerCantMatriculasxSedexAnio();
+
+    fetchAPIData('http://ucresapi.somee.com/Sedes/Listado','http://ucresapi.somee.com/Ubicaciones/Listado',
+    'http://ucresapi.somee.com/RegistroEstudiantes/Listado','http://ucresapi.somee.com/Estudiantes/Listado',urlEstudianteRecidenciaxanno,
+    'https://localhost:7192/RegistroEstudiantes/ObternerCantidadCarrerasDeseadas','https://localhost:7192/RegistroEstudiantes/AniosDisponibles',urlObternerCantMatriculasxSedexAnio)
+        .then(([listaSedes,listaUbicacion,registroEstudiantes,Estudiantes,EstudiantesRecidenciaxanno,carreraDeseadasCantidad,AniosDisponibles,MatrSedexAnio]) => {
+            renderMatriculaxProvinciaChart(EstudiantesRecidenciaxanno,listaUbicacion,registroEstudiantes)
+            renderCantidadCarrerasDeseadas(carreraDeseadasCantidad)
+            renderObtenerMatriculasxSedeyAnio(MatrSedexAnio)
+            enableEventHandlers(EstudiantesRecidenciaxanno,listaUbicacion)
+            Cambio(MatrSedexAnio)
+      
+
         })
 
 }
 
-const renderModelsChart = (pokemon,tipos)  => {
-    const nombrePoke = pokemon.name;
-    const nombre = document.getElementById("pokemonInput");
-    nombre.innerHTML = 'Nombre: '+ nombrePoke;
-    let nombreTipo1 = '';
-    let nombreTipo2 = '';
-
-    if (pokemon.types && pokemon.types.length > 0) {
-        nombreTipo1 = pokemon.types[0].type.name;
-        console.log(nombreTipo1);
-        
-        if (pokemon.types.length > 1) {
-            nombreTipo2 = pokemon.types[1].type.name;
-            console.log(nombreTipo2);
-        }
-    }
-    const tiposPokemonConsultado = [nombreTipo1, nombreTipo2];
-    const pokemontipo =tipos.results.map(name => name.name);
-
+const renderMatriculaxProvinciaChart = (Estudiantes,) => {
+   const EstudiantesRecidenciaxanno = Estudiantes.map(EstudiantesRecidenciaxanno => EstudiantesRecidenciaxanno.cantidad)
+    const RecidenciaEstudiantes = Estudiantes.map(proviene  => proviene.recidencia)
+    const ubicaciones = Estudiantes.map (ubicacion => ubicacion.recidencia)
     const data = {
-        labels: pokemontipo,
+        labels: ubicaciones,
         datasets: [{
-            data: pokemontipo.map(tipo => { return (tiposPokemonConsultado.includes(tipo)) ? 1 : 0;}), 
-            borderColor: getDataColors(),
-            backgroundColor: getDataColors(20)
-        }]
-    }
-
-    const options = {
-        plugins: {
-            legend: { position: 'left' }
-        }
-    }
-
-    new Chart('modelsChart', { type: 'doughnut', data, options })
-}
-
-const renderFeaturesChart = (pokemon,tipos) => {
-       
-        const nombresStats = pokemon.stats.map(stat => stat.stat.name);
-        const valorStats = pokemon.stats.map(stats => stats.base_stat);
-
-    const data = {
-        labels: nombresStats,
-        datasets: [{
-            data: valorStats, 
-            borderColor: getDataColors()[0],
-            backgroundColor: getDataColors(20)[0],
-            pointRadius: 5,
-        }]
-    }
-    const options = {
-        plugins: {
-            legend: { display: false }
-        },
-        scales: {
-            r: {
-                ticks: { display: false }
-            }
-        }
-    }
-
-    new Chart('featuresChart', { type: 'bar', data, options })
-}
-/*const renderFeaturesChart = (pokemon,tipos) => {
-       
-    let nombreTipo1 = '';
-    let nombreTipo2 = '';
-
-    if (pokemon.types && pokemon.types.length > 0) {
-        nombreTipo1 = pokemon.types[0].type.name;
-        console.log(nombreTipo1);
-        
-        if (pokemon.types.length > 1) {
-            nombreTipo2 = pokemon.types[1].type.name;
-            console.log(nombreTipo2);
-        }
-    }
-    const tiposPokemonConsultado = [nombreTipo1, nombreTipo2];
-    const pokemontipo =tipos.results.map(name => name.name);
-    const data = {
-        labels: pokemontipo,
-        datasets: [{
-            label: tiposPokemonConsultado,
-            data: pokemontipo.map(tipo => { return (tiposPokemonConsultado.includes(tipo)) ? 1 : 0;}), 
-            borderColor: getDataColors()[0],
-            backgroundColor: getDataColors(20)[0]
-        }]
-    }
-
-    const options = {
-        plugins: {
-            legend: { display: false }
-        },
-        scales: {
-            r: {
-                ticks: { display: false }
-            }
-        }
-    }
-
-    new Chart('featuresChart', { type: 'radar', data, options })
-}*/
-/*const renderModelsChart = (pokemon,tipos)  => {
-    const nombresStats = pokemon.stats.map(stat => stat.stat.name);
-    const valorStats = pokemon.stats.map(stats => stats.base_stat);
-    const nombrePoke = pokemon.name;
-    const nombre = document.getElementById("pokemonInput");
-    nombre.innerHTML = 'Nombre: '+ nombrePoke;
-    const data = {
-        labels: nombresStats,
-        datasets: [{
-            data: valorStats,
-            borderColor: getDataColors(),
-            backgroundColor: getDataColors(20)
-        }]
-    }
-
-    const options = {
-        plugins: {
-            legend: { position: 'left' }
-        }
-    }
-
-    new Chart('modelsChart', { type: 'doughnut', data, options })
-}*/
-
-
-
-const renderYearsChart = coasters => {
-
-    const years = ['1998-2000', '2001-2003', '2004-2006', '2007-2009', '2013-2015', '2016-2018', '2019-2021']
-
-    const data = {
-        labels: years,
-        datasets: [{
-            data: getCoastersByYear(coasters, years),
+            label: '2020',
+            data: EstudiantesRecidenciaxanno ,
             tension: .5,
-            borderColor: getDataColors()[1],
-            backgroundColor: getDataColors(20)[1],
+            borderColor: getDataColors(),
+            backgroundColor: getDataColors(20),
             fill: true,
             pointBorderWidth: 5
+            
         }]
     }
 
@@ -169,11 +60,82 @@ const renderYearsChart = coasters => {
         plugins: {
             legend: { display: false }
         }
+        
     }
+    
 
-    new Chart('yearsChart', { type: 'line', data, options })
+    new Chart('yearsChart', { type: 'bar', data, options })
 }
 
+const renderCantidadCarrerasDeseadas = (carreraDeseadasCantidad) => {
+    const CantidadCarrerasDeseadas = carreraDeseadasCantidad.map(carreraDeseadasCantidad => carreraDeseadasCantidad.cantidad)
+    const CarreraDeseadaLabels = carreraDeseadasCantidad.map(carreraDeseadaslabels =>carreraDeseadaslabels.carreraDeseada)
+
+     const data = {
+         labels: CarreraDeseadaLabels,
+         datasets: [{
+             label: '2020',
+             data: CantidadCarrerasDeseadas ,
+             tension: .5,
+             borderColor: getDataColors(),
+             backgroundColor: getDataColors(20),
+             fill: true,
+             pointBorderWidth: 5
+         }]
+     }
+ 
+     const options = {
+         plugins: {
+             legend: { display: false }
+         }
+         
+     }
+ 
+     new Chart('featuresChart', { type: 'bar', data, options })
+ }
+ 
+
+ const renderObtenerMatriculasxSedeyAnio = (MatrSedexAnio) => {
+
+    const ListaSedes = MatrSedexAnio.map(matrSedexAnio => matrSedexAnio.nombreSede)
+    const Cantidad = MatrSedexAnio.map(matrSedexAnio => matrSedexAnio.cantidad)
+
+     const data = {
+         labels: ListaSedes,
+         datasets: [{
+             label: '2020',
+             data: Cantidad ,
+             tension: .5,
+             borderColor: getDataColors(),
+             backgroundColor: getDataColors(20),
+             fill: true,
+             pointBorderWidth: 5
+         }]
+     }
+ 
+     const options = {
+         plugins: {
+             legend: { display: false }
+         }
+     }
+ 
+     new Chart('modelsChart', { type: 'bar', data, options })
+ }
 
 
-printCharts()
+
+
+
+
+
+
+ //------------------------REDIRECCIONES----------------------------------\\
+/*<option value="Radar">Radar</option>
+                        <option value="polararea">Polar Area</option>
+                        <option value="bar">Bar</option>
+                        <option value="doughnut">Doughnut</option>
+                        <option value="line">Line</option>
+                        <option value="radar">Radar</option>
+                        */ 
+ 
+printCharts(); // Llama a la función printCharts

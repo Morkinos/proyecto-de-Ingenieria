@@ -1,5 +1,6 @@
 ﻿using apiUCRES.Contexto;
 using apiUCRES.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace apiUCRES.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
+    [EnableCors("MyPolicy")]
     public class RegistroEstudiantesController : Controller
     {
         public readonly DbContextUCRES _contexto;
@@ -25,7 +27,7 @@ namespace apiUCRES.Controllers
             return list;
         }
 
-      [HttpGet("Registro/{IdRegistro}")]
+        [HttpGet("Registro/{IdRegistro}")]
         public async Task<RegistroEstudiante> GetRegistrado(int IdRegistro)
         {
             var temp = await _contexto.RegistroEstudiantes.FirstOrDefaultAsync(x => x.IdRegistro == IdRegistro);
@@ -42,7 +44,7 @@ namespace apiUCRES.Controllers
             return temp;
         }
 
-       [HttpGet("Carrera/{idCarrera}")]
+        [HttpGet("Carrera/{idCarrera}")]
         public async Task<RegistroEstudiante> GetCarrera(int idCarrera)
         {
             var temp = await _contexto.RegistroEstudiantes.FirstOrDefaultAsync(x => x.IdCarrera == idCarrera);
@@ -50,7 +52,7 @@ namespace apiUCRES.Controllers
             return temp;
         }
 
-       [HttpPut("Agregar")]
+        [HttpPut("Agregar")]
         public string Agregar(RegistroEstudiante registroE)
         {
             //variable de control para los mensajes de accion
@@ -114,5 +116,50 @@ namespace apiUCRES.Controllers
 
             return mensaje;
         }
-    }
-}
+
+        [HttpGet("ObternerCantidadCarrerasDeseadas")]
+        public List<CarreraDeseada> ObternerCantidadCarrerasDeseadas()
+        {
+            var cantidadCarreraDeseadaSI = _contexto.CarreraDeseada
+            .FromSqlRaw($"EXEC CarreraDeseadaSI").ToList().First();
+
+            var cantidadCarreraDeseadaNo = _contexto.CarreraDeseada
+           .FromSqlRaw($"EXEC CarreraDeseadaNO").ToList().First();
+
+
+
+            return new List<CarreraDeseada> { cantidadCarreraDeseadaSI, cantidadCarreraDeseadaNo };
+        }
+
+        [HttpGet("ObternerCantMatriculasxSedexAnio")]
+        public List<Matriculaxsedexanio> ObternerCantMatriculasxSedexAnio(int anio)
+        {
+            var CantMatricxSed = _contexto.Matriculaxsedexanio
+           .FromSqlRaw($"EXEC ObtenerMatriculasxSedeyAnio @Anio={anio}")
+           .ToList();
+
+            return CantMatricxSed;
+        }
+
+
+        [HttpGet("ObternerCantMatriculasxAnio")]
+        public List<CantidadMatrxAnio> ObternerCantMatriculasxAnio()
+        {
+            var CantMatricxAnio = _contexto.CantidadMatrxAnio
+           .FromSqlRaw($"EXEC ObtenerMatriculasxAnios")
+           .ToList();
+
+            return CantMatricxAnio;
+        }
+
+        [HttpGet("AniosDisponibles")]
+        public List<AniosDisponibles> AniosDisponibles()
+        {
+            var aniosDisp = _contexto.AniosDisponibles
+           .FromSqlRaw($"EXEC AniosDisponibles")
+           .ToList();
+
+            return aniosDisp;
+        }
+    }//fin del namespace
+}// final de la Clase 

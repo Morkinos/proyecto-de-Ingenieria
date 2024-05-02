@@ -1,5 +1,6 @@
 ﻿using apiUCRES.Contexto;
 using apiUCRES.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace apiUCRES.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
+    [EnableCors("MyPolicy")]
     public class TrasladosController : Controller
     {
         public readonly DbContextUCRES _contexto;
@@ -73,6 +75,28 @@ namespace apiUCRES.Controllers
             return mensaje;
         }
 
+        [HttpGet("ObtenerCantEstudiantesTransladoxanio")]
+        public List<CantEstudiantesTransladoxanio> ObtenerCantEstudiantesTransladoxanio(int anio)
+        {
+            var CantEstTraslad = _contexto.CantEstudiantesTransladoxanio
+           .FromSqlRaw($"EXEC ObtenerCantEstudiantesTransladoxanio @Anio={anio}")
+           .ToList();
 
-    }
-}
+
+            return CantEstTraslad;
+
+        }
+
+        [HttpGet("ObtenerCantEstudiantesTransladoxSede")]
+        public List<Matriculaxsedexanio> ObtenerCantEstudiantesTransladoxSede()
+        {
+            var CantEstTraslad = _contexto.Matriculaxsedexanio
+               .FromSqlRaw($"EXEC ObtenerCantEstudiantesTransladoxsede")
+               .ToList();
+
+            return CantEstTraslad;
+        }
+
+
+    }//fin del namespace
+}//fin de la clase 

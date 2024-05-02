@@ -173,3 +173,33 @@ button{
     color: #ffbc0e;
     transform: scale(1.1);
 }
+
+.general{
+   padding: 100px 0;
+   display: flex;
+}
+
+.general-1{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+}
+
+.general-card{
+    padding: 40px;
+    text-align: center;
+    margin: 0 10px;
+    border-radius: 35px;
+    box-shadow: 0 0 15px gray;
+}
+.button-options{
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    font-weight: 200;
+    color: white;
+    background-color: #262b3c;
+}
+.imgoptions{
+    height: 65px;
+    width: 65px;
+}

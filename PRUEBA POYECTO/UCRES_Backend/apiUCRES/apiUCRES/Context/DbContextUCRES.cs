@@ -17,9 +17,16 @@ namespace apiUCRES.Contexto
         public DbSet<Estudiante> Estudiantes { get; set; }
         public DbSet<RegistroEstudiante> RegistroEstudiantes { get; set; }
         public DbSet<Sede> Sedes { get; set; }
-
+        public DbSet<EstudiantesProvinciasxaño> EstudiantesProvinciasxaño { get; set; }
+        public DbSet<CarreraDeseada> CarreraDeseada { get; set; }
         public DbSet<Traslados> Traslados{ get; set; }
         public DbSet<Ubicacion> Ubicaciones { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Matriculaxsedexanio> Matriculaxsedexanio { get; set; }
+        public DbSet<CantEstudiantesTransladoxanio> CantEstudiantesTransladoxanio { get; set; }
+
+        public DbSet<CantidadMatrxAnio> CantidadMatrxAnio { get; set; }
+        public DbSet<AniosDisponibles> AniosDisponibles { get; set; }
+        
     }
 }
