@@ -110,5 +110,27 @@ namespace apiUCRES.Controllers
             return mensaje;
         }
 
+
+        [HttpGet("MostrarCarrerasPorSedeYCantMatr")]
+        public List<CarrerasXSede> MostrarCarrerasPorSedeYCantMatr(string nombresede)
+        {
+            var carrerasPorSede = _contexto.CarrerasXSede
+                .FromSqlRaw("EXEC MostrarCarrerasPorSedeYCantMatr @NombreSede = {0}", nombresede)
+                .ToList();
+
+            return carrerasPorSede;
+        }
+
+
+        [HttpGet("CarrerasXSedes")]
+        public List<CantEstudiantesTransladoxanio> CarrerasXSedes()
+        {
+            var carrerasPorSede = _contexto.CantEstudiantesTransladoxanio
+                .FromSqlRaw("EXEC ObtenerIdSiguiente")
+                .ToList();
+
+            return carrerasPorSede;
+        }
+
     }
 }

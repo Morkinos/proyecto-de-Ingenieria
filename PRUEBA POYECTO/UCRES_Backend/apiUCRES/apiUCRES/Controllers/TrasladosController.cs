@@ -75,6 +75,10 @@ namespace apiUCRES.Controllers
             return mensaje;
         }
 
+        //--------------------Aca comiensal las solicitudes de los SP 
+
+        //Esto devuelve la cantidad de Estudiantes que se trasladaron por cada año 
+
         [HttpGet("ObtenerCantEstudiantesTransladoxanio")]
         public List<CantEstudiantesTransladoxanio> ObtenerCantEstudiantesTransladoxanio(int anio)
         {
@@ -87,6 +91,7 @@ namespace apiUCRES.Controllers
 
         }
 
+        //Esto devuelve la Cantidad de Estudaintes trasladodo por cada Sede
         [HttpGet("ObtenerCantEstudiantesTransladoxSede")]
         public List<Matriculaxsedexanio> ObtenerCantEstudiantesTransladoxSede()
         {
@@ -96,6 +101,57 @@ namespace apiUCRES.Controllers
 
             return CantEstTraslad;
         }
+
+        //Esto devuelve la cantidad de tralados que Si querian la carrera y lo que no 
+
+        [HttpGet("CantTrasladxCarrDeseadSIYNO")]
+        public List<CarreraDeseada> CantTrasladxCarrDeseadSIYNO()
+        {
+            var cantidadCarreraDeseadaSI = _contexto.CarreraDeseada
+            .FromSqlRaw($"EXEC CantTrasladxCarrDeseadSi").ToList().First();
+
+            var cantidadCarreraDeseadaNo = _contexto.CarreraDeseada
+           .FromSqlRaw($"EXEC CantTrasladxCarrDeseadNo").ToList().First();
+
+
+
+            return new List<CarreraDeseada> { cantidadCarreraDeseadaSI, cantidadCarreraDeseadaNo };
+        }
+
+        //Esto devuelve la cantidad de Estudaintes qye se trasladaron de sede por que la carrera si era la que deseaba
+        [HttpGet("CantEstudxCarrDeseadSixSede")]
+        public List<Matriculaxsedexanio> CantEstudxCarrDeseadSixSede()
+        {
+            var CantEstTraslad = _contexto.Matriculaxsedexanio
+               .FromSqlRaw($"EXEC CantEstudxCarrDeseadSixSede")
+               .ToList();
+
+            return CantEstTraslad;
+        }
+
+
+        //Esto devuelve la cantidad de Estudaintes qye se trasladaron de sede por que la carrera No era la que deseaba
+        [HttpGet("CantEstudxCarrDeseadNoxSede")]
+        public List<Matriculaxsedexanio> CantEstudxCarrDeseadNoxSede()
+        {
+            var CantEstTraslad = _contexto.Matriculaxsedexanio
+               .FromSqlRaw($"EXEC CantEstudxCarrDeseadNoxSede")
+               .ToList();
+
+            return CantEstTraslad;
+        }
+
+        //Esto devuelve la cantidad de Estudaintes por sede qeu se trasladaron 
+        [HttpGet("CantDeMatrXTransladxSede")]
+        public List<Matriculaxsedexanio> CantDeMatrXTransladxSede()
+        {
+            var CantEstTraslad = _contexto.Matriculaxsedexanio
+               .FromSqlRaw($"EXEC CantDeMatrXTransladxSede")
+               .ToList();
+
+            return CantEstTraslad;
+        }
+
 
 
     }//fin del namespace

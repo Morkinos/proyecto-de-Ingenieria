@@ -99,5 +99,33 @@ namespace apiUCRES.Controllers
 
             return mensaje;
         }
+        /****************************************************************************************************/
+
+        public class AuthResponse
+        {
+            public bool Data { get; set; }
+            public int StatusCode { get; set; }
+        }
+
+        [HttpPost]
+        [Route("AutenticarPW")]
+        public async Task<ActionResult<AuthResponse>> AutenticarPW(string correo, string password)
+        {
+            var auth = await _contexto.Usuarios.FirstOrDefaultAsync(u => u.Correo.Equals(correo) && u.Password.Equals(password));
+
+            if (auth == null)
+            {
+                return new AuthResponse { Data = false, StatusCode = 400 }; // Usuario no encontrado, devolver status code 400
+            }
+            else
+            {
+                return new AuthResponse { Data = true, StatusCode = 200 }; // Usuario autenticado correctamente, devolver status code 200
+            }
+        }
+
+
+
+
+
     }
 }

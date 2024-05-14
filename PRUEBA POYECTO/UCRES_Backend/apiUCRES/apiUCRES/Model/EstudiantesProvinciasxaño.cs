@@ -5,7 +5,7 @@ namespace apiUCRES.Model
     
     public class EstudiantesProvinciasxaño
         {
-            [Key]
+         [Key]
         public string Recidencia{ get; set; }
 
         public int Cantidad{ get; set;}

@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace apiUCRES.Controllers
 {
-        [ApiController]
-        [Route("[Controller]")]
-        [EnableCors("MyPolicy")]
+    [ApiController]
+    [Route("[Controller]")]
+    [EnableCors("MyPolicy")]
     public class EstudiantesController : Controller
     {
 
@@ -102,7 +102,8 @@ namespace apiUCRES.Controllers
         }
 
         [HttpGet("ObtenerEstudianteRecidenciaxanno")]
-        public List<EstudiantesProvinciasxaño> Matriculaxsedexanio (string anno) {
+        public List<EstudiantesProvinciasxaño> Matriculaxsedexanio(string anno)
+        {
             var estudiantesPorProvincia = _contexto.EstudiantesProvinciasxaño
             .FromSqlRaw($"EXEC ObtenerEstudiantesPorProvincia @Anio={anno}")
             .ToList();
@@ -110,5 +111,28 @@ namespace apiUCRES.Controllers
             return estudiantesPorProvincia;
         }
 
-    }
-}
+        [HttpGet("CantTotalEstuxProvAll")]
+        public List<EstudiantesProvinciasxaño> CantTotalEstuxProvAll()
+        {
+            var estudiantesPorProvincia = _contexto.EstudiantesProvinciasxaño
+            .FromSqlRaw($"EXEC CantTotalEstuxProvAll")
+            .ToList();
+
+            return estudiantesPorProvincia;
+        }
+
+        [HttpGet("ObtenerIdSiguiente")]
+        public List<CantEstudiantesTransladoxanio> ObtenerIdSiguiente()
+        {
+            var estudiantesPorProvincia = _contexto.CantEstudiantesTransladoxanio
+            .FromSqlRaw($"EXEC ObtenerIdSiguiente")
+            .ToList();
+
+            return estudiantesPorProvincia;
+        }
+
+
+
+
+    }//namespace
+}//Class

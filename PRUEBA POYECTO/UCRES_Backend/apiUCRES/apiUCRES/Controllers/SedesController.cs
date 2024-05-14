@@ -81,5 +81,19 @@ namespace apiUCRES.Controllers
 
             return mensaje;
         }
+
+
+        [HttpGet("SedesDisponibles")]
+        public List<SedesDisponibles> SedesDisponibles()
+        {
+            var sedesDisp = _contexto.SedesDisponibles
+           .FromSqlRaw($"EXEC SedesDisponibles")
+           .ToList();
+
+            return sedesDisp;
+        }
+
+
+
     }
 }

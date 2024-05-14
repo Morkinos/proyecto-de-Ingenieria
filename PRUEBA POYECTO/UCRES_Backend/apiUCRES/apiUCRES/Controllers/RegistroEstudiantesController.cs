@@ -116,7 +116,7 @@ namespace apiUCRES.Controllers
 
             return mensaje;
         }
-
+        //----------------------API CON LOS SP------------------------------------
         [HttpGet("ObternerCantidadCarrerasDeseadas")]
         public List<CarreraDeseada> ObternerCantidadCarrerasDeseadas()
         {
@@ -135,7 +135,7 @@ namespace apiUCRES.Controllers
         public List<Matriculaxsedexanio> ObternerCantMatriculasxSedexAnio(int anio)
         {
             var CantMatricxSed = _contexto.Matriculaxsedexanio
-           .FromSqlRaw($"EXEC ObtenerMatriculasxSedeyAnio @Anio={anio}")
+           .FromSqlRaw($"EXEC ObternerCantMatriculasxSedexAnio @Anio={anio}")
            .ToList();
 
             return CantMatricxSed;

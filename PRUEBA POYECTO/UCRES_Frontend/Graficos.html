@@ -10,67 +10,25 @@
 
 
     <body>
-        <header class="header">
-            <div class="logo">
-                <img src="img/logo.png" alt="Logo de la marca">
-            </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="Index.html">Inicio</a></li>
-                    <li><a href="Graficos.html">Estadisticas</a></li>
-                    <li><a href="Seleccion.html">Consulta</a></li>
-                    
-                </ul>            
-            </nav>
-            <a class="btn" href="#"><button class="bttn">Inicio Sesion</button></a>
+        <header class="header" id="navbar">
+            
         </header>
         <main>
         <h1>Graficos a definir</h1>
         <p>Mis primeros Graficos</p>
         
         <hr>
-
-       <section class="cols-2">
-
-            <figure>
-                <h2 id="pokemonInput"></h2>
-                <h2>Cantidad de Matriculas por sede en cada Año 
-                    <select id="OpcionesAnios">
-                        <option value="2020">2020</option>
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                    </select>
-                </h2>
-                    <canvas id="modelsChart"></canvas>      
-            </figure>
-
-            <figure>
-                <h2>Comparativa de características:
-                    <select id="featuresOptions">
-                        <option value="height">Altura (m)</option>
-                        <option value="length">Longitud (m)</option>
-                        <option value="speed">Velocidad (km/h)</option>
-                    </select>
-                </h2>
-                <canvas id="featuresChart"></canvas>
-            </figure>
-
-        </section>
-
         <section class="cols-1">
             <figure>
                 <h2>Matriculas por año  en las provincias
                     <select id="AniosOptions">
-                        <option value="2020">2020</option>
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
+                       
                     </select>
+                    
                 </h2>
-                <canvas id="yearsChart" height="300px"></canvas>
+                <canvas id="ChartCantMatricxAnioxProvinc" height="300px"></canvas>
+
+                
             </figure>
 
         </section>
@@ -79,5 +37,6 @@
     <script src="js/helpers.js"></script>
     <script src="js/handlers.js"></script>
     <script src="js/app.js"></script>
+    <script type="text/JavaScript" src="js/general.js"></script>
     </body>
 </html>
