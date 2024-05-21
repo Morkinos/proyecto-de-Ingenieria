@@ -49,69 +49,64 @@ if (nombrePagina == loginPagina){
             evento.preventDefault();//evita la recarga de la pagina
           
             let datos = new FormData(formularioLogin);
-           
-            let datosEnviar =
-            {
-                correo: datos.get('correo'),
-                password: datos.get('password')
-            };
-            console.log(url+autenticar+'?correro='+datosEnviar.correo+'&password='+datosEnviar.password)
-            'https://localhost:7192/Usuarios/AutenticarPW?correo=Raquel.PorrasSoto%40ucr.ac.cr&password=ucr2025' 
-
-            fetch ( url + autenticar,
+            let correo =  datos.get('correo');
+            let password = datos.get('password');
+            console.log( url + autenticar,
                 {
-                    method: 'POST',
-                    body: JSON.stringify(datosEnviar)   
+                    method: 'GET',
+                    body: JSON.stringify({Correo : correo, Password:password})   
                 }
             ) 
-            console.log(datosEnviar)
+
+            fetch(url + autenticar + `?correo=${correo}&password=${password}`, {
+                method: 'GET'
+            })
+            //console.log(datosEnviar)
             .then( repuesta=> repuesta.json() )
             .then ( (datosrepuestas) => {
                 console.log(datosrepuestas.data)
                 
-                if (datosrepuestas.code === 200) {
+                if (datosrepuestas.statusCode === 200) {
                 // Guarda el token de sesión en localStorage
                  sessionStorage.setItem('token', datosrepuestas.Data);
-                  insertarDatosLogin(datosrepuestas);
                 } 
+                insertarDatosLogin(datosrepuestas);
             }) 
         })
 
     }
-
-function insertarDatosLogin(datosrepuestas){
-    if ( datosrepuestas.code == 200){
-        mensajes.innerHTML = `<div
-        class="alert alert-success alert-dismissible fade show"
-        role="alert">
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
-        <strong>Ingreso exitoso</strong>
-    </div>`;
-    window.location.href = 'index.html';
+    function insertarDatosLogin(datosrepuestas) {
+        if (datosrepuestas.statusCode == 200) {
+            mensajes.innerHTML = `<div
+                class="alert alert-success alert-dismissible fade show"
+                role="alert">
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+                <strong>Ingreso exitoso</strong>
+            </div>`;
+            // Esperar 2 segundos antes de redirigir
+            setTimeout(function() {
+                window.location.href = 'index.html';
+            }, 2000); // 2000 milisegundos = 2 segundos
+        } else {
+            mensajes.innerHTML = `<div
+                class="alert alert-warning alert-dismissible fade show"
+                role="alert">
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+                <strong>Correo/Contraseña incorrectos</strong>
+            </div>`;
+        }
     }
-    else{
-        console.log('Entre2')
-    mensajes.innerHTML = `<div
-        class="alert alert-warning alert-dismissible fade show"
-        role="alert"
-    >
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
-        <strong>Correo/Contraseña incorrectos</strong>
-    </div>`;
-
-
-    }
-}
+    
 
 function cargarspinner(){
     document.getElementById("seccionspinner").innerHTML = spinner;

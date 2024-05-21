@@ -26,25 +26,27 @@
         <h2>Bienvenidos a la pagina informacion de la UCR</h2>
         <h1>Seleccione su grafico</h1>
     <div>
-        <h2>Tipos de Graficos
+        <h2>Tipos de Gráficos
             <select id="tipoGrafico">
                 <option value="bar" selected>Barras</option>
                 <option value="polarArea">Área Polar</option>
                 <option value="doughnut">Dona</option>
             </select>
-            <script>
-                // Almacena el valor seleccionado en localStorage cuando cambia el select
-                document.getElementById("tipoGrafico").addEventListener("change", function () {
-                    localStorage.setItem('tipoGrafico', this.value);
-                });
-
-                // Verifica si hay un valor almacenado en localStorage y selecciónalo si existe
-                let tipoGraficoGuardado = localStorage.getItem('tipoGrafico');
-                if (tipoGraficoGuardado) {
-                    document.getElementById('tipoGrafico').value = tipoGraficoGuardado;
-                }
-            </script>
         </h2>
+        <script>
+            // Almacena el valor seleccionado en localStorage cuando cambia el select
+            document.getElementById("tipoGrafico").addEventListener("change", function () {
+                localStorage.setItem('tipoGrafico', this.value);
+            });
+        
+            // Verifica si hay un valor almacenado en localStorage y selecciónalo si existe
+            let tipoGraficoGuardado = localStorage.getItem('tipoGrafico');
+            if (!tipoGraficoGuardado || tipoGraficoGuardado.trim() === "") {
+                tipoGraficoGuardado = "bar"; // Valor por defecto
+                localStorage.setItem('tipoGrafico', tipoGraficoGuardado); // Almacena el valor por defecto en localStorage
+            }
+            document.getElementById('tipoGrafico').value = tipoGraficoGuardado;
+        </script>        
     </div>
     <div class="container-card">
 

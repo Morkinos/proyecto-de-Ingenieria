@@ -121,16 +121,14 @@ namespace apiUCRES.Controllers
             return carrerasPorSede;
         }
 
-
         [HttpGet("CarrerasXSedes")]
-        public List<CantEstudiantesTransladoxanio> CarrerasXSedes()
+        public List<Infosedes> CarrerasXSedes()
         {
-            var carrerasPorSede = _contexto.CantEstudiantesTransladoxanio
-                .FromSqlRaw("EXEC ObtenerIdSiguiente")
+            var carreras = _contexto.Infosedes
+                .FromSqlRaw("EXEC CarrerasXSedes")
                 .ToList();
 
-            return carrerasPorSede;
+            return carreras;
         }
-
     }
 }

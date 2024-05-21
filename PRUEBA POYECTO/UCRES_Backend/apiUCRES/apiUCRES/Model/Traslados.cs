@@ -25,7 +25,7 @@ namespace apiUCRES.Model
         [Required(ErrorMessage = "Por favor digite el Motivo de Traslado")]
         [DataType(DataType.Text)] //decir el tipo de dato del atributo
         [MaxLength(50)] //definir el maximo de caracteres
-        [MinLength(5)]//definir el minimo de caracteres
+        [MinLength(3)]//definir el minimo de caracteres
         [StringLength(50)] //otra manera de definir el tamaño maximo del string
         public string MotivoTraslado { get; set; }
     }

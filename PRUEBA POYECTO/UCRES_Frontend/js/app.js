@@ -12,7 +12,7 @@ let tipoGrafico = localStorage.getItem('tipoGrafico');
 function EstudiantesRecidenciaxanno() {
     let anno = localStorage.getItem('AniosOptions')
 
-    if (anno !== null && anno === "") {
+    if (anno === null || anno === ""){
         anno = 2020;
     }
     let url = `https://localhost:7192/Estudiantes/ObtenerEstudianteRecidenciaxanno?anno=${anno}`;
@@ -23,7 +23,7 @@ function EstudiantesRecidenciaxanno() {
 
 function ObternerCantMatriculasxSedexAnio() {
     let anno = localStorage.getItem('OpcionesAnios')
-    if (anno == null) {
+    if (anno === null || anno === "") {
         anno = 2020;
     }
     let url = `https://localhost:7192/RegistroEstudiantes/ObternerCantMatriculasxSedexAnio?anio=${anno}`
@@ -32,7 +32,7 @@ function ObternerCantMatriculasxSedexAnio() {
 
 function ObtenerCantEstudiantesTransladoxanio() {
     let anno = localStorage.getItem('OpciondeAnio')
-    if (anno !== null && anno === "") {
+    if (anno === null || anno === "") {
         anno = 2020;
     }
     let url = `https://localhost:7192/Traslados/ObtenerCantEstudiantesTransladoxanio?anio=${anno}`;
@@ -42,7 +42,7 @@ function ObtenerCantEstudiantesTransladoxanio() {
 
 function ObtenerCarrerasXsedes() {
     let sede = localStorage.getItem('opcionesSede')
-    if (sede !== null && sede === "") {
+    if (sede === null || sede === "") {
         sede = 'Sede de Occidente';
     }
     let url = `https://localhost:7192/Carreras/MostrarCarrerasPorSedeYCantMatr?nombresede=${sede}`;

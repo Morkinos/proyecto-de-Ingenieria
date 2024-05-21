@@ -107,7 +107,7 @@ namespace apiUCRES.Controllers
             public int StatusCode { get; set; }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("AutenticarPW")]
         public async Task<ActionResult<AuthResponse>> AutenticarPW(string correo, string password)
         {

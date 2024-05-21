@@ -35,27 +35,30 @@ namespace apiUCRES.Controllers
             return temp;
         }
 
-        [HttpPut("Agregar")]
-        public string Agregar(Traslados traslados)
+        [HttpPost("Agregar")]
+        public IActionResult Agregar(Traslados traslados)
         {
-            //variable de control para los mensajes de accion
-            string mensaje = "";
+            var respuesta = new RespuestaApi();
             try
             {
                 _contexto.Traslados.Add(traslados);
                 _contexto.SaveChanges();
 
-                mensaje = "Traslado agregado correctamente";
+                respuesta.Exito = true;
+                respuesta.Mensaje = "Traslado agregado correctamente";
+                respuesta.IdEstudiante = traslados.IdTraslado; // Asegúrate de que Id es la clave primaria y se genera al guardar
             }
             catch (Exception ex)
             {
-                mensaje = "Error: " + ex.Message;
+                respuesta.Exito = false;
+                respuesta.Mensaje = "Error: " + ex.Message;
             }
 
-            return mensaje;
+            return Ok(respuesta);
         }
 
-        [HttpPut("Modificar")]
+
+        [HttpPost("Modificar")]
         public string Modificar(Traslados traslados)
         {
             string mensaje = "No se logró aplicar los cambios";

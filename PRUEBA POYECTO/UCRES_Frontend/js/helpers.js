@@ -23,15 +23,6 @@ const updateChartData = (chartId, data, label) => {
     chart.update()
 }
 
-function openNav() {
-    document.getElementById("mobile-menu").style.width = "100%";
-}
-
-function closeNav() {
-    document.getElementById("mobile-menu").style.width = "0%";
-}
-
-
 
 if(tittle === graficos12){
 // Función para llenar las opciones de sede

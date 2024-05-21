@@ -23,7 +23,6 @@ namespace apiUCRES.Controllers
         public async Task<List<RegistroEstudiante>> Listado()
         {
             var list = await _contexto.RegistroEstudiantes.ToListAsync();
-
             return list;
         }
 
@@ -31,16 +30,13 @@ namespace apiUCRES.Controllers
         public async Task<RegistroEstudiante> GetRegistrado(int IdRegistro)
         {
             var temp = await _contexto.RegistroEstudiantes.FirstOrDefaultAsync(x => x.IdRegistro == IdRegistro);
-
             return temp;
         }
-
 
         [HttpGet("Estudiante/{IdEstudiante}")]
         public async Task<RegistroEstudiante> GetEstudianteRegistrado(int IdEstudiante)
         {
             var temp = await _contexto.RegistroEstudiantes.FirstOrDefaultAsync(x => x.IdEstudiante == IdEstudiante);
-
             return temp;
         }
 
@@ -48,34 +44,35 @@ namespace apiUCRES.Controllers
         public async Task<RegistroEstudiante> GetCarrera(int idCarrera)
         {
             var temp = await _contexto.RegistroEstudiantes.FirstOrDefaultAsync(x => x.IdCarrera == idCarrera);
-
             return temp;
         }
 
-        [HttpPut("Agregar")]
-        public string Agregar(RegistroEstudiante registroE)
+        [HttpPost("Agregar")]
+        public IActionResult Agregar(RegistroEstudiante registroE)
         {
-            //variable de control para los mensajes de accion
-            string mensaje = "";
+            var respuesta = new RespuestaApi();
             try
             {
                 _contexto.RegistroEstudiantes.Add(registroE);
                 _contexto.SaveChanges();
 
-                mensaje = "Estudiante Registrado correctamente";
+                respuesta.Exito = true;
+                respuesta.Mensaje = "Estudiante registrado correctamente";
+                respuesta.IdEstudiante = registroE.IdEstudiante; // Asegúrate de que Id es la clave primaria y se genera al guardar
             }
             catch (Exception ex)
             {
-                mensaje = "Error: " + ex.Message;
+                respuesta.Exito = false;
+                respuesta.Mensaje = "Error: " + ex.Message;
             }
 
-            return mensaje;
+            return Ok(respuesta);
         }
 
-        [HttpDelete("Eliminar")]
-        public async Task<string> Eliminar(int id)
+        [HttpPost("Eliminar")]
+        public async Task<IActionResult> Eliminar(int id)
         {
-            string mensaje = "No se ha podido eliminar el Estudiante";
+            var respuesta = new RespuestaApi();
             try
             {
                 var temp = await _contexto.Estudiantes.FirstOrDefaultAsync(f => f.IdEstudiante == id);
@@ -84,49 +81,56 @@ namespace apiUCRES.Controllers
                 {
                     temp.Estado = "Deshabilitado";
                     _contexto.Estudiantes.Update(temp);
-                    _contexto.SaveChanges();
+                    await _contexto.SaveChangesAsync();
 
-                    mensaje = "Estudiante " + temp.Nombre + " Inhabilitado correctamente";
+                    respuesta.Exito = true;
+                    respuesta.Mensaje = "Estudiante " + temp.Nombre + " inhabilitado correctamente";
+                    respuesta.IdEstudiante = temp.IdEstudiante;
+                }
+                else
+                {
+                    respuesta.Exito = false;
+                    respuesta.Mensaje = "Estudiante no encontrado";
                 }
             }
             catch (Exception ex)
             {
-                mensaje = "Error: " + ex.Message;
+                respuesta.Exito = false;
+                respuesta.Mensaje = "Error: " + ex.Message;
             }
 
-            return mensaje;
+            return Ok(respuesta);
         }
 
-        [HttpPut("Modificar")]
-        public string Modificar(RegistroEstudiante registroE)
+        [HttpPost("Modificar")]
+        public IActionResult Modificar(RegistroEstudiante registroE)
         {
-            string mensaje = "No se logró aplicar los cambios";
-
+            var respuesta = new RespuestaApi();
             try
             {
                 _contexto.RegistroEstudiantes.Update(registroE);
                 _contexto.SaveChanges();
 
-                mensaje = "Cambios aplicados correctamente";
+                respuesta.Exito = true;
+                respuesta.Mensaje = "Cambios aplicados correctamente";
+                respuesta.IdEstudiante = registroE.IdEstudiante; // Asegúrate de que Id es la clave primaria y se actualiza correctamente
             }
             catch (Exception ex)
             {
-                mensaje = "Error: " + ex.Message;
+                respuesta.Exito = false;
+                respuesta.Mensaje = "Error: " + ex.Message;
             }
 
-            return mensaje;
+            return Ok(respuesta);
         }
-        //----------------------API CON LOS SP------------------------------------
+
         [HttpGet("ObternerCantidadCarrerasDeseadas")]
         public List<CarreraDeseada> ObternerCantidadCarrerasDeseadas()
         {
             var cantidadCarreraDeseadaSI = _contexto.CarreraDeseada
-            .FromSqlRaw($"EXEC CarreraDeseadaSI").ToList().First();
-
+                .FromSqlRaw($"EXEC CarreraDeseadaSI").ToList().First();
             var cantidadCarreraDeseadaNo = _contexto.CarreraDeseada
-           .FromSqlRaw($"EXEC CarreraDeseadaNO").ToList().First();
-
-
+                .FromSqlRaw($"EXEC CarreraDeseadaNO").ToList().First();
 
             return new List<CarreraDeseada> { cantidadCarreraDeseadaSI, cantidadCarreraDeseadaNo };
         }
@@ -135,19 +139,18 @@ namespace apiUCRES.Controllers
         public List<Matriculaxsedexanio> ObternerCantMatriculasxSedexAnio(int anio)
         {
             var CantMatricxSed = _contexto.Matriculaxsedexanio
-           .FromSqlRaw($"EXEC ObternerCantMatriculasxSedexAnio @Anio={anio}")
-           .ToList();
+                .FromSqlRaw($"EXEC ObternerCantMatriculasxSedexAnio @Anio={anio}")
+                .ToList();
 
             return CantMatricxSed;
         }
-
 
         [HttpGet("ObternerCantMatriculasxAnio")]
         public List<CantidadMatrxAnio> ObternerCantMatriculasxAnio()
         {
             var CantMatricxAnio = _contexto.CantidadMatrxAnio
-           .FromSqlRaw($"EXEC ObtenerMatriculasxAnios")
-           .ToList();
+                .FromSqlRaw($"EXEC ObtenerMatriculasxAnios")
+                .ToList();
 
             return CantMatricxAnio;
         }
@@ -156,10 +159,17 @@ namespace apiUCRES.Controllers
         public List<AniosDisponibles> AniosDisponibles()
         {
             var aniosDisp = _contexto.AniosDisponibles
-           .FromSqlRaw($"EXEC AniosDisponibles")
-           .ToList();
+                .FromSqlRaw($"EXEC AniosDisponibles")
+                .ToList();
 
             return aniosDisp;
         }
-    }//fin del namespace
-}// final de la Clase 
+    }
+
+    public class RespuestaApi
+    {
+        public bool Exito { get; set; }
+        public string Mensaje { get; set; }
+        public int? IdEstudiante { get; set; }
+    }
+}

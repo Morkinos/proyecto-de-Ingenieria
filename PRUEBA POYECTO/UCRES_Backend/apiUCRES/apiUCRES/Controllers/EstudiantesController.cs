@@ -10,6 +10,7 @@ namespace apiUCRES.Controllers
     [ApiController]
     [Route("[Controller]")]
     [EnableCors("MyPolicy")]
+ 
     public class EstudiantesController : Controller
     {
 
@@ -36,70 +37,91 @@ namespace apiUCRES.Controllers
             return temp;
         }
 
-        [HttpPut("Agregar")]
-        public string Agregar(Estudiante estudiante)
+        [HttpPost("Agregar")]
+        public IActionResult Agregar(Estudiante estudiante)
         {
-            //variable de control para los mensajes de accion
-            string mensaje = "";
+            var respuesta = new RespuestaApi();
             try
             {
                 _contexto.Estudiantes.Add(estudiante);
                 _contexto.SaveChanges();
 
-                mensaje = "Estudiante agregado correctamente";
+                respuesta.Exito = true;
+                respuesta.Mensaje = "Estudiante agregado correctamente";
+                respuesta.IdEstudiante = estudiante.IdEstudiante; // Asegúrate de que Id es la clave primaria y se genera al guardar
             }
             catch (Exception ex)
             {
-                mensaje = "Error: " + ex.Message;
+                respuesta.Exito = false;
+                respuesta.Mensaje = "Error: " + ex.Message;
             }
 
-            return mensaje;
+            return Ok(respuesta);
         }
 
-        [HttpDelete("Eliminar")]
-        public async Task<string> Eliminar(int id)
+        [HttpPost("Eliminar")]
+        public async Task<IActionResult> Eliminar([FromBody] int estudiante)
         {
             string mensaje = "No se ha podido eliminar el estudiante";
+            var respuesta = new RespuestaApi();
             try
             {
-                var temp = await _contexto.Estudiantes.FirstOrDefaultAsync(f => f.IdEstudiante == id);
+                var temp = await _contexto.Estudiantes.FirstOrDefaultAsync(f => f.IdEstudiante == estudiante);
 
                 if (temp != null)
                 {
-                    temp.Estado = "Deshabilitado";
+                    temp.Estado = "Inactivo";
                     _contexto.Estudiantes.Update(temp);
-                    _contexto.SaveChanges();
+                    await _contexto.SaveChangesAsync();
 
                     mensaje = "Estudiante " + temp.Nombre + " eliminado correctamente";
+                    respuesta.Exito = true;
+                    respuesta.Mensaje = mensaje;
+                    respuesta.IdEstudiante = estudiante;
+                }
+                else
+                {
+                    respuesta.Exito = false;
+                    respuesta.Mensaje = "Estudiante no encontrado";
                 }
             }
             catch (Exception ex)
             {
-                mensaje = "Error: " + ex.Message;
+                respuesta.Exito = false;
+                respuesta.Mensaje = "Error: " + ex.Message;
             }
 
-            return mensaje;
+            return Ok(respuesta);
         }
 
-        [HttpPut("Modificar")]
-        public string Modificar(Estudiante estudiante)
-        {
-            string mensaje = "No se logró aplicar los cambios";
 
+        [HttpPost("Modificar")]
+        public IActionResult Modificar([FromBody] Estudiante registroE)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var respuesta = new RespuestaApi();
             try
             {
-                _contexto.Estudiantes.Update(estudiante);
+                _contexto.Estudiantes.Update(registroE);
                 _contexto.SaveChanges();
 
-                mensaje = "Cambios aplicados correctamente";
+                respuesta.Exito = true;
+                respuesta.Mensaje = "Cambios aplicados correctamente";
+                respuesta.IdEstudiante = registroE.IdEstudiante;
             }
             catch (Exception ex)
             {
-                mensaje = "Error: " + ex.Message;
+                respuesta.Exito = false;
+                respuesta.Mensaje = "Error: " + ex.Message;
             }
 
-            return mensaje;
+            return Ok(respuesta);
         }
+
 
         [HttpGet("ObtenerEstudianteRecidenciaxanno")]
         public List<EstudiantesProvinciasxaño> Matriculaxsedexanio(string anno)

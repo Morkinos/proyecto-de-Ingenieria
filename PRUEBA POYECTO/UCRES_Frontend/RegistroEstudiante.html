@@ -1,3 +1,8 @@
+<script>
+    if (!sessionStorage.getItem("token")) {
+        location.href = "login.html"
+    }
+</script>
 <!doctype html>
 <html lang="en">
 
@@ -6,7 +11,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -14,168 +18,124 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <header class="header" id="navbar">
-            <div>
-
-            </div>
-        </header>
-        <main>
-            <div class="container-fluid min-vh-100">
-                <div class="row ">
-                    <h1>Estudiantes</h1>
-
-
-                    <!-------------------------------------Estudiantes------------------------------------------------------------------------------------------->
-                    <form class="form" id="formulario">
-                        <div class="mb-3">
-                            <label for="" class="form-label"> Numero de Carrera</label>
-                            <input type="number" class="form-control" name="idCarreras" id="idCarreras"
-                                aria-describedby="helpId" placeholder="" required />
-                            <small id="helpId" class="small">Ingrese el numero de carrera si no sabe consulte la  <a href="CarrerasOpciones.html" class="links">LISTA</a></small>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Nombre Completo</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
-                                placeholder="" required />
-                            <small id="helpId" class="small">Ingrese su nombre Completo ejemplo: Raul Gonzalez Araya</small>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Cedula</label>
-                            <input type="text" class="form-control" name="cedula" id="cedula" aria-describedby="helpId"
-                                placeholder="" required />
-                            <small id="helpId" class="small">Ingrese su Cedula ejmp: 208440855</small>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Correo Eletronico</label>
-                            <input type="email" class="form-control" name="correo" id="correo" aria-describedby="helpId"
-                                placeholder="" required />
-                            <small id="helpId" class="small">Ingrese su Correo Electronico ejemplo: Raul.Gonzalez@ucr.ac.cr</small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="motivoTraslado" class="form-label">Recidencia</label>
-                            <select class="form-select" name="Recidencia" id="Recidencia" required>
-                                <option value="" selected disabled>Selecciona una Provincia</option>
-                                <option value="San José">San José</option>
-                                <option value="Alajuela">Alajuela</option>
-                                <option value="Heredia">Heredia</option>
-                                <option value="Cartago">Cartago</option>
-                                <option value="Guenacaste">Guenacaste</option>
-                                <option value="Puntarenas">Puntarenas</option>
-                                <option value="Limon">Limon</option>
-                            </select>
-                            <small id="helpId" class="small">Selecciona la provincia donde vives.</small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="" class="form-label">Telefono</label>
-                            <input type="tel" class="form-control" name="Telefono" id="Telefono"
-                                aria-describedby="helpId" placeholder="" required />
-                            <small id="helpId" class="small">Ingrese su Telefono ejemplo:89589044</small>
-                        </div>
-
-                        <!-------------------------------------RegistroEstudiantes------------------------------------------------------------------------------------------->
-
-                        <div class="mb-3">
-                            <label for="" class="form-label">Año matricula</label>
-                            <input type="number" class="form-control" name="Año" id="Año" aria-describedby="helpId"
-                                placeholder="" required />
-                            <small id="helpId" class="small">Ingrese el año qeu se matriculo</small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="" class="form-label">Carrera Deseada</label>
-                            <select class="form-select" name="CarreraDeseada" id="CarreraDeseada" required>
-                                <option value="" selected disabled>Selecciona una opción</option>
-                                <option value="si">Sí</option>
-                                <option value="no">No</option>
-                            </select>
-                            <small id="helpId" class="small">Seleccione una opcion</small>
-                        </div>
-                        <!-------------------------------------Tralados------------------------------------------------------------------------------------------->
-                        <div class="">
-                            <label for="trasladoCheckbox">Marque la casilla si el estudiante se traslado</label>
-                            <input type="checkbox" id="trasladoCheckbox"> <!-- Casilla de verificación -->
-                        </div>
-
-                        <div id="trasladoFields" style="display:none;"> <!-- Campos a mostrar/ocultar -->
-                            <!-- Sede más cercana -->
-                            <div class="mb-3">
-                                <label for="lugarRecidencia" class="form-label">Sede más cercana</label>
-                                <select class="form-select" name="lugarRecidencia" id="lugarRecidencia" required>
-                                    <option value="si">Sí</option>
-                                    <option value="no">No</option>
-                                </select>
-                                <small id="helpId" class="small">Sede más cercana a tu residencia</small>
-                            </div>
-
-                            <!-- Sede matriculada -->
-                            <div class="mb-3">
-                                <label for="" class="form-label">Sede matriculada</label>
-                                <select class="form-select" name="lugarMatriculado" id="lugarMatriculado" required>
-                                    <option value="si">Sí</option>
-                                    <option value="no">No</option>
-                                </select>
-                                <small id="helpId" class="small">Sede matriculada a la que te
-                                    trasladaste</small>
-                            </div>
-
-                            <!-- Motivo de traslado -->
-                            <div class="mb-3">
-                                <label for="motivoTraslado" class="form-label">Motivo por el que te trasladaste</label>
-                                <select class="form-select" name="motivoTraslado" id="motivoTraslado" required>
-                                    <option value="" selected disabled>Selecciona un motivo</option>
-                                    <option value="Trabajo">Trabajo</option>
-                                    <option value="Estudios">Estudios</option>
-                                    <option value="Familia">Familia</option>
-                                    <option value="Cambio de residencia">Cambio de residencia</option>
-                                    <option value="Otro">Otro</option>
-                                </select>
-                                <small id="helpId" class="small">Selecciona el motivo por el que te
-                                    trasladaste.</small>
-                            </div>
-                        </div>
-                        <!-------------------------------------Fin------------------------------------------------------------------------------------------->
-
-                        <div class="mb-3" ">
-                            <button type=" reset" class="btn btn-danger ">
-                            Reset
-                            </button>
-                            <button type="submit" class="btn btn-primary  ">
-                                Enviar
-                            </button>
-
-                        </div>
-                    </form>
-                    <div id="mensajes">
-
+    <header class="header" id="navbar"></header>
+    <main>
+        <div class="container-fluid min-vh-100">
+            <div class="row ">
+                <h1>Estudiantes</h1>
+                <form class="form" id="formulario">
+                    <div class="mb-3">
+                        <label for="idCarreras" class="form-label">Numero de Carrera</label>
+                        <input type="number" class="form-control" name="idCarreras" id="idCarreras"
+                            aria-describedby="helpId" placeholder="" required readonly/>
+                        <small id="helpId" class="small">Seleccione el numero de carrera en la siguiente  <a href="CarrerasOpciones.html" class="links">LISTA</a></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId"
+                            placeholder="" required />
+                        <small id="helpId" class="small">Ingrese su nombre Completo ejemplo: Raul Gonzalez Araya</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cedula" class="form-label">Cedula</label>
+                        <input type="text" class="form-control" name="cedula" id="cedula" aria-describedby="helpId"
+                            placeholder="" required />
+                        <small id="helpId" class="small">Ingrese su Cedula ejmp: 208440855</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo Eletronico</label>
+                        <input type="email" class="form-control" name="correo" id="correo" aria-describedby="helpId"
+                            placeholder="" required />
+                        <small id="helpId" class="small">Ingrese su Correo Electronico ejemplo: Raul.Gonzalez@ucr.ac.cr</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="recidencia" class="form-label">Recidencia</label>
+                        <select class="form-select" name="recidencia" id="recidencia" required>
+                            <option value="" selected disabled>Selecciona una Provincia</option>
+                            <option value="San José">San José</option>
+                            <option value="Alajuela">Alajuela</option>
+                            <option value="Heredia">Heredia</option>
+                            <option value="Cartago">Cartago</option>
+                            <option value="Guanacaste">Guanacaste</option>
+                            <option value="Puntarenas">Puntarenas</option>
+                            <option value="Limon">Limon</option>
+                        </select>
+                        <small id="helpId" class="small">Selecciona la provincia donde vives.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input type="tel" class="form-control" name="telefono" id="telefono" aria-describedby="helpId"
+                            placeholder="" required />
+                        <small id="helpId" class="small">Ingrese su Telefono ejemplo:89589044</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Año" class="form-label">Año matricula</label>
+                        <input type="number" class="form-control" name="Año" id="Año" aria-describedby="helpId"
+                            placeholder="" required />
+                        <small id="helpId" class="small">Ingrese el año que se matriculo</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="CarreraDeseada" class="form-label">El estudiante matricula la Carrera Deseada</label>
+                        <select class="form-select" name="CarreraDeseada" id="CarreraDeseada" required>
+                            <option value="" selected disabled>Selecciona una opción</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                        </select>
+                        <small id="helpId" class="small">Seleccione una opcion</small>
                     </div>
 
-                </div>
 
+
+                    
+                    <div class="">
+                        <input type="checkbox" id="trasladoCheckbox" class="checkbox-custom">
+                        <label for="trasladoCheckbox" class="checkbox-label">Marque la casilla si el estudiante se trasladó</label>
+                    </div>
+                    <div id="trasladoFields" style="display:none;"> <!-- Campos a mostrar/ocultar -->
+                        <div class="mb-3">
+                            <label for="lugarRecidencia" class="form-label">Sede más cercana</label>
+                            <select class="form-select" name="lugarRecidencia" id="lugarRecidencia" >
+                            </select>
+                            <small id="helpId" class="small">Sede más cercana a tu residencia</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lugarMatriculado" class="form-label">Sede matriculada</label>
+                            <!--<select class="form-select" name="lugarMatriculado" id="lugarMatriculado" ></select>-->
+                            <input type="text" class="form-control" name="lugarMatriculado" id="lugarMatriculado"
+                            aria-describedby="helpId" placeholder="" required readonly/>
+                            <small id="helpId" class="small">Sede matriculada a la que te trasladaste</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="motivoTraslado" class="form-label">Motivo por el que te trasladaste</label>
+                            <select class="form-select" name="motivoTraslado" id="motivoTraslado" >
+                                <option value="" selected disabled>Selecciona un motivo</option>
+                                <option value="Trabajo">Trabajo</option>
+                                <option value="Estudios">Estudios</option>
+                                <option value="Familia">Familia</option>
+                                <option value="Cambio de residencia">Cambio de residencia</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            <small id="helpId" class="small">Selecciona el motivo por el que te trasladaste.</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+                <div id="mensajes"></div>
             </div>
-
-        </main>
-        <footer>
-            <!-- place footer here -->
-            <div id="piedepagina">
-
-            </div>
-        </footer>
-    </div>
-
+        </div>
+    </main>
+    <footer>
+        <div id="piedepagina"></div>
+    </footer>
     <!-- Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="js/general.js"></script>
     <script src="js/estudiantes.js"></script>
+
 </body>
 
 </html>

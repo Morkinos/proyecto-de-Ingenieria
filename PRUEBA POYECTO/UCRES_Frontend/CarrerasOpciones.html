@@ -1,3 +1,8 @@
+<script>
+    if (!sessionStorage.getItem("token")) {
+        location.href = "login.html"
+    }
+</script>
 <!doctype html>
 <html lang="en">
 
@@ -24,7 +29,7 @@
             <div class="container-fluid min-vh-100">
                 <div class="row ">
                     <h1>Lista de Carreras</h1>
-
+                    <h2>Puedes seleccionarlo dandole click al idCarrera</h2>
                     <div class="table-responsive">
 
                         <div id="seccionspinner">

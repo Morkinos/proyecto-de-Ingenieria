@@ -4,7 +4,6 @@ let mensajes = document.querySelector("#mensajes");
 let url = "https://localhost:7192/Carreras/";
 let listar = "CarrerasXSedes";
 
-
 let nombrePagina = document.title;
 
 let listarPaginaEstu = "Listar Carreras";
@@ -22,12 +21,10 @@ let spinner = `
             Loading...
             </button>`;
 
-
-
 function cargar() {
     tablaCarreraxSede.innerHTML = "";
     cargarspinner();
-    fetch(url + listar) 
+    fetch(url + listar)
         .then(repuesta => repuesta.json())
         .then((datosrepuestas) => {
             console.log(datosrepuestas)
@@ -37,13 +34,12 @@ function cargar() {
 }
 
 function pintardatos(objetodatos) {
-    // console.log(objetodatos);
     if (objetodatos != null) {
         for (const item of objetodatos) {
             console.log(item.id);
             tablaCarreraxSede.innerHTML += `
             <tr class="table-primary">
-                <td scope="row" class="carreraId">${item.idCarrera}</td>
+                <td scope="row" class="carreraId" data-nombresede="${item.nombreSede}">${item.idCarrera}</td>
                 <td>${item.nombre}</td>
                 <td>${item.nombreSede}</td>
             </tr>`;
@@ -57,6 +53,9 @@ function pintardatos(objetodatos) {
     celdasCarreraId.forEach(celda => {
         celda.addEventListener('click', function() {
             const idCarrera = this.textContent; // Obtener el ID de la carrera
+            const nombreSede = this.getAttribute('data-nombresede'); // Obtener el nombre de la sede
+
+            localStorage.setItem('nombreSedeSeleccionada', nombreSede); // Guardar el nombre de la sede en el localStorage
             localStorage.setItem('idCarreraSeleccionada', idCarrera); // Guardar el ID en el localStorage
             window.location.href = 'RegistroEstudiante.html'; // Redirigir al formulario de creación de estudiante
         });
