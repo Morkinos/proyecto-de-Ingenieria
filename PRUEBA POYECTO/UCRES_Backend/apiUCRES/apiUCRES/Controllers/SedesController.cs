@@ -35,6 +35,7 @@ namespace apiUCRES.Controllers
 
             return temp;
         }
+
         [HttpGet("Ubicacion/{idUbicacion}")]
         public async Task<Sede> GetSedeUbicaion(int idUbicacion)
         {
@@ -71,7 +72,6 @@ namespace apiUCRES.Controllers
             {
                 _contexto.Sedes.Update(sede);
                 _contexto.SaveChanges();
-
                 mensaje = "Cambios aplicados correctamente";
             }
             catch (Exception ex)

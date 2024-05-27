@@ -1,42 +1,134 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Lista Matriculas</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-    </head>
-
-    <body>
-        <header>
-            <!-- place navbar here -->
+<head>
+    <title>Listar Registros</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/menuEstudiantes.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="header" id="navbar">
+            <div></div>
         </header>
-        <main></main>
+        <main>
+            <div class="container-fluid min-vh-100">
+                <div class="row">
+                    <h1>Lista de Registros de Estudiantes</h1>
+                    <input type="text" id="searchBar" class="form-control" placeholder="Buscar por carnet Estudiante o por numero de cédula" onkeyup="filtrarRegistrosEstudiantes()">
+                    <div class="table-responsive mt-3">
+                        <div id="seccionspinner"></div>
+                        <div id="mensajes"></div>
+                        <table class="">
+                            <thead class="">
+                                <tr>
+                                    <th>ID Registro</th>
+                                    <th>ID Estudiante</th>
+                                    <th>Nombre</th>
+                                    <th>Cédula</th>
+                                    <th>Carnet Estudiante</th>
+                                    <th>ID Carrera</th>
+                                    <th>Año</th>
+                                    <th>Correo</th>
+                                    <th>Residencia</th>
+                                    <th>Teléfono</th>
+                                    <th>Carrera Deseada</th>
+                                    <th>Sede Matriculada</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider" id="tablaRegistroEstudiantes"></tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
         <footer>
-            <!-- place footer here -->
+            <div id="piedepagina"></div>
         </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
+    </div>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+    <!-- Modal para Eliminar Registro -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content modal-content-Card">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Eliminar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="idEliminarModal">
+                    Usted va a eliminar el registro: <span id="idEliminar"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary no-effect" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger no-effect" onclick="modalConfirmacionEliminarRegistroEstudiante()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Registro -->
+    <div class="modal fade" id="modalEdicion" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content modal-content-Card">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Actualizar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formularioEditarRegistroEstudiante">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Id Registro</label>
+                            <input type="hidden" id="idRegistro" name="idRegistro" readonly>
+                            <span id="idEditarRegistro"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Id Estudiante</label>
+                            <input type="text" class="form-control" name="idEstudiante" id="idEstudiante" aria-describedby="helpId" placeholder="" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Id Carrera</label>
+                            <input type="text" class="form-control" name="idCarrera" id="idCarrera" aria-describedby="helpId" placeholder="" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Año</label>
+                            <input type="number" class="form-control" name="año" id="año" aria-describedby="helpId" placeholder="" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label for="carreraDeseada" class="form-label">Carrera Deseada</label>
+                            <select class="form-control" name="carreraDeseada" id="carreraDeseada" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="SI">Sí</option>
+                                <option value="NO">No</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select class="form-control" name="estado" id="estado" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary espacio">Enviar</button>
+                            <button type="button" class="btn btn-secondary espacio" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="js/general.js"></script>
+    <script src="js/registroEstudiante.js"></script>
+</body>
 </html>

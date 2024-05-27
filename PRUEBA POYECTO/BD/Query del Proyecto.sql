@@ -11,7 +11,8 @@ CREATE TABLE Estudiantes (
 	Correo VARCHAR(100) not null,
     Recidencia VARCHAR(100) not null,
 	Telefono VARCHAR(100) not null,
-	Estado varchar(25) not null
+	Estado varchar(25) not null,
+	carnetEstudiante VARCHAR(50)
 );
 
 -- Tabla de Carrera
@@ -97,9 +98,3 @@ REFERENCES Ubicaciones(IdUbicacion);
 
 
 
-
-SELECT * FROM Traslados
-select * from Estudiantes
-select * from RegistroEstudiantes
-select * from Sedes
-select * from Carreras WHERE idSede=4

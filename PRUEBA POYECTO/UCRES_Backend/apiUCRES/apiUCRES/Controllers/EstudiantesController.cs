@@ -10,10 +10,9 @@ namespace apiUCRES.Controllers
     [ApiController]
     [Route("[Controller]")]
     [EnableCors("MyPolicy")]
- 
+
     public class EstudiantesController : Controller
     {
-
         public readonly DbContextUCRES _contexto;
 
         public EstudiantesController(DbContextUCRES dbContext)
@@ -25,7 +24,6 @@ namespace apiUCRES.Controllers
         public async Task<List<Estudiante>> Listado()
         {
             var list = await _contexto.Estudiantes.ToListAsync();
-
             return list;
         }
 
@@ -33,18 +31,45 @@ namespace apiUCRES.Controllers
         public async Task<Estudiante> GetEstudiante(int id)
         {
             var temp = await _contexto.Estudiantes.FirstOrDefaultAsync(x => x.IdEstudiante == id);
-
             return temp;
         }
 
         [HttpPost("Agregar")]
-        public IActionResult Agregar(Estudiante estudiante)
+        public async Task<IActionResult> Agregar(Estudiante estudiante)
         {
             var respuesta = new RespuestaApi();
             try
             {
+                // Verificar si la cédula ya existe
+                var cedulaExistente = await _contexto.Estudiantes.FirstOrDefaultAsync(e => e.Cedula == estudiante.Cedula);
+                if (cedulaExistente != null)
+                {
+                    respuesta.Exito = false;
+                    respuesta.Mensaje = "La cédula ya existe.";
+                    return Ok(respuesta);
+                }
+
+                // Verificar si el carnet de estudiante ya existe
+                var carnetExistente = await _contexto.Estudiantes.FirstOrDefaultAsync(e => e.carnetEstudiante == estudiante.carnetEstudiante);
+                if (carnetExistente != null)
+                {
+                    respuesta.Exito = false;
+                    respuesta.Mensaje = "El carnet de estudiante ya existe.";
+                    return Ok(respuesta);
+                }
+
+                // Verificar si el correo ya existe
+                var correoExistente = await _contexto.Estudiantes.FirstOrDefaultAsync(e => e.Correo == estudiante.Correo);
+                if (correoExistente != null)
+                {
+                    respuesta.Exito = false;
+                    respuesta.Mensaje = "El correo ya existe.";
+                    return Ok(respuesta);
+                }
+
+                // Si no existen duplicados, proceder a agregar el registro
                 _contexto.Estudiantes.Add(estudiante);
-                _contexto.SaveChanges();
+                await _contexto.SaveChangesAsync();
 
                 respuesta.Exito = true;
                 respuesta.Mensaje = "Estudiante agregado correctamente";
@@ -94,7 +119,6 @@ namespace apiUCRES.Controllers
             return Ok(respuesta);
         }
 
-
         [HttpPost("Modificar")]
         public IActionResult Modificar([FromBody] Estudiante registroE)
         {
@@ -122,13 +146,12 @@ namespace apiUCRES.Controllers
             return Ok(respuesta);
         }
 
-
         [HttpGet("ObtenerEstudianteRecidenciaxanno")]
         public List<EstudiantesProvinciasxaño> Matriculaxsedexanio(string anno)
         {
             var estudiantesPorProvincia = _contexto.EstudiantesProvinciasxaño
-            .FromSqlRaw($"EXEC ObtenerEstudiantesPorProvincia @Anio={anno}")
-            .ToList();
+                .FromSqlRaw($"EXEC ObtenerEstudiantesPorProvincia @Anio={anno}")
+                .ToList();
 
             return estudiantesPorProvincia;
         }
@@ -137,8 +160,8 @@ namespace apiUCRES.Controllers
         public List<EstudiantesProvinciasxaño> CantTotalEstuxProvAll()
         {
             var estudiantesPorProvincia = _contexto.EstudiantesProvinciasxaño
-            .FromSqlRaw($"EXEC CantTotalEstuxProvAll")
-            .ToList();
+                .FromSqlRaw($"EXEC CantTotalEstuxProvAll")
+                .ToList();
 
             return estudiantesPorProvincia;
         }
@@ -147,14 +170,11 @@ namespace apiUCRES.Controllers
         public List<CantEstudiantesTransladoxanio> ObtenerIdSiguiente()
         {
             var estudiantesPorProvincia = _contexto.CantEstudiantesTransladoxanio
-            .FromSqlRaw($"EXEC ObtenerIdSiguiente")
-            .ToList();
+                .FromSqlRaw($"EXEC ObtenerIdSiguiente")
+                .ToList();
 
             return estudiantesPorProvincia;
         }
-
-
-
 
     }//namespace
 }//Class

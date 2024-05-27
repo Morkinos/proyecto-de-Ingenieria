@@ -16,6 +16,9 @@ let estudiantes = [];
 let crearPagina = "Crear Estudiantes";
 let listaEstudiante = "Listar Estudiantes";
 
+let modalEliminar;
+let modalEdicion;
+
 let spinner = `
             <button
             class="btn btn-primary"
@@ -129,6 +132,7 @@ if (nombrePagina == crearPagina) {
         let datosEstudiantes = {
             nombre: datos.get('nombre'),
             cedula: datos.get('cedula'),
+            carnetEstudiante: datos.get('carnetEstudiante'),
             correo: datos.get('correo'),
             recidencia: datos.get('recidencia'),
             telefono: datos.get('telefono'),
@@ -292,14 +296,15 @@ function pintardatos(objetodatos) {
         for (const item of objetodatos) {
             tablaGrupos.innerHTML += `
             <tr id="fila-${item.idEstudiante}"  class="table-primary">
-                <td scope="row">${item.idEstudiante}</td>
-                <td>${item.nombre}</td>
-                <td>${item.cedula}</td>
-                <td>${item.correo}</td>
-                <td>${item.recidencia}</td>
-                <td>${item.telefono}</td>
-                <td class="estado">${item.estado}</td>
-                <td>
+                <td data-label="ID" scope="row">${item.idEstudiante}</td>
+                <td data-label="Nombre">${item.nombre}</td>
+                <td data-label="Cédula">${item.cedula}</td>
+                <td data-label="Carnet Estudiante">${item.carnetEstudiante}</td>
+                <td data-label="Correo">${item.correo}</td>
+                <td data-label="Residencia">${item.recidencia}</td>
+                <td data-label="Teléfono">${item.telefono}</td>
+                <td data-label="Estado" class="estado">${item.estado}</td>
+                <td data-label="Acciones">
                 <a name="" id="" class="btn btn-primary no-effect" onclick="editar('${encodeURIComponent(JSON.stringify(item))}')" role="button">Editar</a>
                 <a name="" id="" class="btn btn-danger no-effect" onclick="eliminar('${item.idEstudiante}')" role="button">Eliminar</a>
             </td>
@@ -345,6 +350,7 @@ if (nombrePagina == listaEstudiante) {
             idEstudiante: datos.get('id'),
             nombre: datos.get('nombre'),
             cedula: datos.get('cedula'),
+            carnetEstudiante: datos.get('carnetEstudiante'),
             correo: datos.get('correo'),
             recidencia: datos.get('recidencia'),
             telefono: datos.get('telefono'),
@@ -362,7 +368,6 @@ if (nombrePagina == listaEstudiante) {
         })
         .then(respuesta => respuesta.json())
         .then((datosrepuestas) => {
-            console.log(datosrepuestas)
             editarDatos(datosrepuestas);
         })
         .catch(console.log);
@@ -372,12 +377,13 @@ if (nombrePagina == listaEstudiante) {
 function editar(datos) {
     let objeto = JSON.parse(decodeURIComponent(datos));
 
-    const modalEdicion = new bootstrap.Modal(document.getElementById("modalEdicion"));
+    modalEdicion = new bootstrap.Modal(document.getElementById("modalEdicion"));
     modalEdicion.show();
-
     document.getElementById("id").value = objeto.idEstudiante;
     document.getElementById("nombre").value = objeto.nombre;
     document.getElementById("cedula").value = objeto.cedula;
+    document.getElementById("cedula").value = objeto.cedula;
+    document.getElementById("carnetEstudiante").value = objeto.carnetEstudiante;
     document.getElementById("correo").value = objeto.correo;
     document.getElementById("recidencia").value = objeto.recidencia;
     document.getElementById("telefono").value = objeto.telefono;
@@ -387,20 +393,10 @@ function editar(datos) {
 
 function editarDatos(datosrepuestas) {
     if ((datosrepuestas.exito = true) || (datosrepuestas.status == 200 )) {
-        mensajes.innerHTML = `<div
-        class="alert alert-success alert-dismissible fade show"
-        role="alert">
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
-        <strong>Modificación exitosa</strong>
-    </div>`;
-        setTimeout(() => {
-            window.location.href = "ListaEstudiantes.html";
-        }, 500);
+
+         mostrarMensaje("El estudiante ha sido modificado correctamente.", 'success');
+            modalEdicion.hide(); // Cerrar el modal
+            cargar(); 
        
     } else {
         mensajes.innerHTML = `<div
@@ -435,7 +431,7 @@ function mostrarMensaje(mensaje, tipo) {
 }
 
 // Variable global para el modal
-let modalEliminar;
+
 
 // Función para abrir el modal de eliminación
 function eliminar(id) {
@@ -463,7 +459,7 @@ function modalConfirmacionEliminar() {
 
     fetch(urlEstudiantes + Eliminar, {
         method: 'POST',
-        body: JSON.stringify({ id: id }),
+        body: JSON.stringify(id),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -472,7 +468,7 @@ function modalConfirmacionEliminar() {
     .then(data => {
         if (data.exito === true) {
             // Eliminación exitosa
-            mostrarMensaje("El registro ha sido eliminado correctamente.", 'success');
+            mostrarMensaje("El estudiante ha sido eliminado correctamente.", 'success');
             modalEliminar.hide(); // Cerrar el modal
             cargar(); // Actualizar la lista después de eliminar
         } else {

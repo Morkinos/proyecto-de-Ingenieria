@@ -200,7 +200,7 @@ BEGIN
     FROM Sedes S
     LEFT JOIN Carreras C ON S.IdSede = C.IdSede
     LEFT JOIN RegistroEstudiantes RE ON C.IdCarrera = RE.IdCarrera
-    WHERE S.NombreSede = @NombreSede
+    WHERE S.NombreSede = @NombreSede and Re.Estado = 'Activo'
     GROUP BY  C.Nombre;
 END;
 EXECUTE MostrarCarrerasPorSedeYCantMatr @NombreSede = 'Sede de Occidente';
@@ -226,15 +226,17 @@ END;
 
 EXECUTE CarrerasXSedes
 select * from Sedes
+
 ----------------------------------------------------------------------------------------------------------------
-CREATE OR ALTER PROCEDURE ObtenerIdSiguiente
+CREATE OR ALTER PROCEDURE sedeXCarrera
+    @idCarrera INT
 AS
 BEGIN
-    -- Obtener el último idEstudiante y sumarle 1
-    SELECT MAX(idEstudiante) + 1 AS cantidad
-    FROM Estudiantes;
+    SELECT S.NombreSede
+    FROM Sedes S
+    INNER JOIN Carreras C ON S.IdSede = C.IdSede
+    WHERE C.IdCarrera = @idCarrera
+    GROUP BY S.NombreSede;
 END;
 
-EXECUTE ObtenerIdSiguiente
-select MAX(idEstudiante)
-from Estudiantes
+execute sedeXCarrera @idCarrera= 52

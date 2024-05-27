@@ -135,7 +135,7 @@ const renderCantidadCarrerasDeseadas = (carreraDeseadasCantidad) => {
     const data = {
         labels: CarreraDeseadaLabels,
         datasets: [{
-            label: '2020',
+            label: 'Cantidad',
             data: CantidadCarrerasDeseadas,
             tension: 1,
             borderColor: getDataColors(),

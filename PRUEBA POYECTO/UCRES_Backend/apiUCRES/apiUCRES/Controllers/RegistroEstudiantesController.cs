@@ -70,27 +70,27 @@ namespace apiUCRES.Controllers
         }
 
         [HttpPost("Eliminar")]
-        public async Task<IActionResult> Eliminar(int id)
+        public async Task<IActionResult> Eliminar([FromBody] int id)
         {
             var respuesta = new RespuestaApi();
             try
             {
-                var temp = await _contexto.Estudiantes.FirstOrDefaultAsync(f => f.IdEstudiante == id);
+                var temp = await _contexto.RegistroEstudiantes.FirstOrDefaultAsync(f => f.IdRegistro == id);
 
                 if (temp != null)
                 {
-                    temp.Estado = "Deshabilitado";
-                    _contexto.Estudiantes.Update(temp);
+                    temp.Estado = "Inactivo";
+                    _contexto.RegistroEstudiantes.Update(temp);
                     await _contexto.SaveChangesAsync();
 
                     respuesta.Exito = true;
-                    respuesta.Mensaje = "Estudiante " + temp.Nombre + " inhabilitado correctamente";
+                    respuesta.Mensaje = "Registro " + temp.Estado;
                     respuesta.IdEstudiante = temp.IdEstudiante;
                 }
                 else
                 {
                     respuesta.Exito = false;
-                    respuesta.Mensaje = "Estudiante no encontrado";
+                    respuesta.Mensaje = "Registro no encontrado";
                 }
             }
             catch (Exception ex)
@@ -164,6 +164,18 @@ namespace apiUCRES.Controllers
 
             return aniosDisp;
         }
+
+        [HttpGet("sedeXCarrera")]
+        public List<SedesDisponibles> sedeXCarrera(int idCarrera)
+        {
+            var CantMatricxSed = _contexto.SedesDisponibles
+                .FromSqlRaw($"EXEC sedeXCarrera @idCarrera={idCarrera}")
+                .ToList();
+
+            return CantMatricxSed;
+        }
+
+
     }
 
     public class RespuestaApi
@@ -172,4 +184,5 @@ namespace apiUCRES.Controllers
         public string Mensaje { get; set; }
         public int? IdEstudiante { get; set; }
     }
+
 }

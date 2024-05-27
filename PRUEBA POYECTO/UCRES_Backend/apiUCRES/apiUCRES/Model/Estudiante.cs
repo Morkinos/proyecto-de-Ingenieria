@@ -21,13 +21,13 @@ namespace apiUCRES.Model
         public string Cedula { get; set; }
 
         [Required(ErrorMessage = "Por favor digite el Correo")]
-        [DataType(DataType.Text)] //decir el tipo de dato del atributo
+        [DataType(DataType.EmailAddress)] //decir el tipo de dato del atributo
         [MaxLength(50)] //definir el maximo de caracteres
         [MinLength(5)]//definir el minimo de caracteres
         [StringLength(50)] //otra manera de definir el tamaño maximo del string
         public string Correo { get; set; }
 
-        [Required(ErrorMessage = "Por favor digite el Recidencia")]
+        [Required(ErrorMessage = "Por favor digite la Recidencia")]
         [DataType(DataType.Text)] //decir el tipo de dato del atributo
         [MaxLength(50)] //definir el maximo de caracteres
         [MinLength(1)]//definir el minimo de caracteres
@@ -35,7 +35,7 @@ namespace apiUCRES.Model
         public string Recidencia { get; set; }
 
         [Required(ErrorMessage = "Por favor digite el Telefono")]
-        [DataType(DataType.Text)] //decir el tipo de dato del atributo
+        [DataType(DataType.PhoneNumber)] //decir el tipo de dato del atributo
         [MaxLength(50)] //definir el maximo de caracteres
         [MinLength(1)]//definir el minimo de caracteres
         [StringLength(9)] //otra manera de definir el tamaño maximo del string
@@ -47,5 +47,12 @@ namespace apiUCRES.Model
         [MinLength(5)]//definir el minimo de caracteres
         [StringLength(8)] //otra manera de definir el tamaño maximo del string
         public string Estado { get; set; }
+
+        [Required(ErrorMessage = "Por favor digite el Carnet de Estudiantes")]
+        [DataType(DataType.Text)] //decir el tipo de dato del atributo
+        [MaxLength(50)] //definir el maximo de caracteres
+        [MinLength(1)]//definir el minimo de caracteres
+        [StringLength(15)] //otra manera de definir el tamaño maximo del string
+        public string carnetEstudiante { get; set; }
     }
 }

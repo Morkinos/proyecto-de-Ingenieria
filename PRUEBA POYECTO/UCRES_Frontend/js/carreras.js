@@ -21,22 +21,24 @@ let spinner = `
             Loading...
             </button>`;
 
+let carreras = []; // Variable para almacenar las carreras
+
 function cargar() {
     tablaCarreraxSede.innerHTML = "";
     cargarspinner();
     fetch(url + listar)
         .then(repuesta => repuesta.json())
         .then((datosrepuestas) => {
-            console.log(datosrepuestas)
-            pintardatos(datosrepuestas)
+            carreras = datosrepuestas; // Almacenar los datos en la variable global
+            pintardatos(carreras);
         })
         .catch(console.log)
 }
 
 function pintardatos(objetodatos) {
     if (objetodatos != null) {
+        tablaCarreraxSede.innerHTML = ""; // Limpiar la tabla antes de renderizar los datos
         for (const item of objetodatos) {
-            console.log(item.id);
             tablaCarreraxSede.innerHTML += `
             <tr class="table-primary">
                 <td scope="row" class="carreraId" data-nombresede="${item.nombreSede}">${item.idCarrera}</td>
@@ -60,6 +62,14 @@ function pintardatos(objetodatos) {
             window.location.href = 'RegistroEstudiante.html'; // Redirigir al formulario de creación de estudiante
         });
     });
+}
+
+function filtrarCarreras() {
+    const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+    const carrerasFiltradas = carreras.filter(carrera =>
+        carrera.nombre.toLowerCase().includes(searchTerm)
+    );
+    pintardatos(carrerasFiltradas);
 }
 
 function cargarspinner() {
