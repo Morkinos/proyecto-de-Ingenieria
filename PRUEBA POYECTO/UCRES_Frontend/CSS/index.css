@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+body{
+    font-family: 'Poppins', monospace;
+    background-color: #181f38;
+
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.index{
+    background-color: #121729;
+    padding:100px 0;
+    display: flex;
+    align-items: center;
+    border-radius: 3%;
+    margin-bottom: 10px;
+}
+.video {
+    background-color: #121729;
+    padding: 100px 0;
+    display: flex;
+    justify-content: center; /* Centrar el contenido horizontalmente */
+    align-items: center; /* Centrar el contenido verticalmente */
+    border-radius: 3%;
+    margin-bottom: 10px;
+}
+
+.video-content {
+    text-align: center; /* Centrar el contenido textualmente */
+}
+
+.video-title h2{
+    text-align: left; /* Alinear el título a la izquierda */
+    color: white; /* Asegúrate de que el color del título sea visible */
+    margin-bottom: 20px; /* Añadir margen debajo del título */
+}
+
+.video-frame {
+    display: flex;
+    justify-content: center; /* Centrar el iframe horizontalmente */
+}
+
+.video iframe {
+    width: 560px; /* Ajusta el ancho del video según sea necesario */
+    height: 315px; /* Ajusta la altura del video según sea necesario */
+    border: none; /* Elimina el borde del iframe */
+}
+
+.index_1{
+    width: 75%;
+    padding-right: 150px;
+}
+.index_1 h2{
+    padding-left: 15px;
+    font-size: 40px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 35px;
+}
+.index_1 p {
+    text-align: left;
+    padding-left:20px;
+    font-size: 16px;
+    color: white;
+    margin-bottom: 35px;
+}
+.index_1 span{
+   color: white; 
+}
+/*------------------------------------------------------*/
+.index_2{
+    width: 75%;
+    padding-right: 150px;
+}
+.index_2 h2{
+    padding-right: 15px;
+    font-size: 40px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 35px;
+}
+.index_2 p {
+    padding-left:20px;
+    font-size: 16px;
+    color: white;
+    margin-bottom: 35px;
+}
+.index_2 span{
+   color: white; 
+}
+
+.img-1, .img-2{
+    width: 250px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 25px;
+}

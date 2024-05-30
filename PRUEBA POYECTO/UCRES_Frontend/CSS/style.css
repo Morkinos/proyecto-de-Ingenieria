@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
 * {
     margin: 0;
     padding: 0;
@@ -257,8 +257,7 @@ input{
     }
   }
 
-  
-  Cagandola
+
   .dropdown-menu {
     background-color: black; 
     border: 1px solid #ccc;

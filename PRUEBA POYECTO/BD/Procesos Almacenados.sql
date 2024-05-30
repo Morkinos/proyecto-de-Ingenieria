@@ -13,6 +13,7 @@ BEGIN
     GROUP BY E.Recidencia;
 END;
 EXECUTE ObtenerEstudiantesPorProvincia @Anio=2024;
+
 ----------------------------------------------------------------------------------------
 CREATE OR ALTER PROCEDURE CarreraDeseadaSI
 AS

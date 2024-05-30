@@ -81,14 +81,14 @@ async function cargarRegistroEstudiantes() {
                 registro.numeroCedula = estudiante.cedula || 'N/A';
                 registro.nombre = estudiante.nombre || 'N/A';
                 registro.correo = estudiante.correo || 'N/A';
-                registro.residencia = estudiante.residencia || 'N/A';
+                registro.recidencia = estudiante.recidencia || 'N/A';
                 registro.telefono = estudiante.telefono || 'N/A';
             } else {
                 registro.carnetEstudiante = 'N/A';
                 registro.numeroCedula = 'N/A';
                 registro.nombre = 'N/A';
                 registro.correo = 'N/A';
-                registro.residencia = 'N/A';
+                registro.recidencia = 'N/A';
                 registro.telefono = 'N/A';
             }
             registro.sedeMatriculada = await obtenerSede(registro.idCarrera); // Obtener la sede usando la nueva función
@@ -117,7 +117,7 @@ function pintarRegistroEstudiantes(objetodatos) {
                 <td>${item.idCarrera}</td>
                 <td>${item.año}</td>
                 <td>${item.correo}</td>
-                <td>${item.residencia}</td>
+                <td>${item.recidencia}</td>
                 <td>${item.telefono}</td>
                 <td>${item.carreraDeseada}</td>
                 <td>${item.sedeMatriculada}</td>
