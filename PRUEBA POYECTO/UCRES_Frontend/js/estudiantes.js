@@ -318,7 +318,10 @@ function pintardatos(objetodatos) {
 
 function filtrarEstudiantes() {
     const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-    const estudiantesFiltrados = estudiantes.filter(estudiante => estudiante.cedula.toLowerCase().includes(searchTerm));
+    const estudiantesFiltrados = estudiantes.filter(estudiante => 
+        estudiante.cedula.toLowerCase().includes(searchTerm) ||
+        estudiante.carnet.toLowerCase().includes(searchTerm) // Agrega esta línea
+    );
     pintardatos(estudiantesFiltrados);
 }
 
@@ -376,19 +379,18 @@ if (nombrePagina == listaEstudiante) {
 
 function editar(datos) {
     let objeto = JSON.parse(decodeURIComponent(datos));
-
+    console.log(datos);
     modalEdicion = new bootstrap.Modal(document.getElementById("modalEdicion"));
     modalEdicion.show();
-    document.getElementById("id").value = objeto.idEstudiante;
+    document.getElementById("idEstudiante").value = objeto.idEstudiante;
     document.getElementById("nombre").value = objeto.nombre;
-    document.getElementById("cedula").value = objeto.cedula;
     document.getElementById("cedula").value = objeto.cedula;
     document.getElementById("carnetEstudiante").value = objeto.carnetEstudiante;
     document.getElementById("correo").value = objeto.correo;
     document.getElementById("recidencia").value = objeto.recidencia;
     document.getElementById("telefono").value = objeto.telefono;
     document.getElementById("estado").value = objeto.estado;
-    document.getElementById("idEditar").innerHTML = objeto.idEstudiante;
+    document.getElementById("idEditarEstudiante").innerHTML = objeto.idEstudiante;
 }
 
 function editarDatos(datosrepuestas) {
@@ -415,8 +417,7 @@ function editarDatos(datosrepuestas) {
 
 
 /*ELIMINAR ESTUDIANTE */
-// Función para mostrar mensajes// Función para mostrar mensajes
-// Función para mostrar mensajes
+
 function mostrarMensaje(mensaje, tipo) {
     const mensajes = document.getElementById('mensajes');
     

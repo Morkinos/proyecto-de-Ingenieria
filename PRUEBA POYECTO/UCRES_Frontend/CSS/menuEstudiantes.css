@@ -112,49 +112,4 @@ tbody tr:hover {
     background: rgba(255, 255, 255, 0.4);
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 600px) {
-    table {
-        font-size: 12px;
-    }
 
-    th, td {
-        padding: 10px;
-    }
-
-    thead {
-        display: none; /* Hide table header on small screens */
-    }
-
-    tbody tr {
-        display: block; /* Make each row a block element */
-        margin-bottom: 10px;
-    }
-
-    tbody tr td {
-        display: flex; /* Make each cell a flex container */
-        justify-content: space-between; /* Align items within cell */
-        border-bottom: none;
-        position: relative;
-        padding-left: 50%;
-    }
-
-    tbody tr td::before {
-        content: attr(data-label); /* Use data-label attribute as label */
-        position: absolute;
-        left: 0;
-        width: 45%;
-        padding-left: 10px;
-        font-weight: bold;
-        text-align: left;
-        white-space: nowrap;
-    }
-
-    /* Adjust buttons to fit better in small screens */
-    tbody tr td .btn {
-        width: 45%;
-        margin-bottom: 5px; /* Add some space between buttons */
-        padding: 0rem;
-    }
-
-}

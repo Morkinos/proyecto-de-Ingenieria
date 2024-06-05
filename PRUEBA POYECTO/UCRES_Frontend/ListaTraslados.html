@@ -33,8 +33,8 @@
                                     <th>ID Estudiante</th>
                                     <th>Número de Cédula</th>
                                     <th>Carnet Estudiante</th>
-                                    <th>Lugar de Recidencia</th>
                                     <th>Sede más cercana</th>
+                                    <th>Sede Traslado</th>
                                     <th>Motivo de Traslado</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -89,16 +89,35 @@
                             <input type="text" class="form-control" name="idEstudiante" id="idEstudiante" aria-describedby="helpId" placeholder="" readonly />
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Sede mas Cercana</label>
-                            <input type="text" class="form-control" name="lugarRecidencia" id="lugarRecidencia" aria-describedby="helpId" placeholder="" required />
+                            <label for="" class="form-label">Sede más Cercana</label>
+                            <input type="text" class="form-control" name="lugarRecidencia" id="lugarRecidencia" aria-describedby="helpId" placeholder="" readonly />
                         </div>
+
                         <div class="mb-3">
-                            <label for="" class="form-label">Lugar de Traslado</label>
-                            <input type="text" class="form-control" name="lugarDeTraslado" id="lugarDeTraslado" aria-describedby="helpId" placeholder="" required />
+                            <label for="lugarDeTraslado" class="form-label">Sede</label>
+                            <select id="lugarDeTraslado" class="form-select" name="lugarDeTraslado">
+                                <option value="Sede de Occidente">Sede de Occidente</option>
+                                <option value="Sede de Guanacaste">Sede de Guanacaste</option>
+                                <option value="Sede del Caribe">Sede del Caribe</option>
+                                <option value="Sede del Pacifico">Sede del Pacifico</option>
+                                <option value="Sede del Sur">Sede del Sur</option>
+                                <option value="Rodrigo Facio">Rodrigo Facio</option>
+                                <option value="Sede Interuniversitaria de Alajuela">Sede Interuniversitaria de Alajuela</option>
+                                <option value="Sede Regional del Atlántico">Sede Regional del Atlántico</option>
+                            </select>
                         </div>
+
                         <div class="mb-3">
-                            <label for="" class="form-label">Motivo de Traslado</label>
-                            <input type="text" class="form-control" name="motivoTraslado" id="motivoTraslado" aria-describedby="helpId" placeholder="" required />
+                            <label for="motivoTraslado" class="form-label">Motivo por el que te trasladaste</label>
+                            <select class="form-select" name="motivoTraslado" id="motivoTraslado" >
+                                <option value="" selected disabled>Selecciona un motivo</option>
+                                <option value="Trabajo">Trabajo</option>
+                                <option value="Estudio">Estudio</option>
+                                <option value="Familia">Familia</option>
+                                <option value="Cambio de residencia">Cambio de residencia</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            
                         </div>
                         
                         <div class="mb-3">

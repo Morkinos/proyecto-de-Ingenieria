@@ -27,7 +27,7 @@
             <div class="container-fluid min-vh-100 ">
                 <div class="row">
                     <h1>Lista de Estudiantes</h1>
-                    <input type="number" id="searchBar" class="form-control" placeholder="Buscar por cedula" onkeyup="filtrarEstudiantes()">
+                    <input type="text" id="searchBar" class="form-control" placeholder="Buscar por cedula o carnet" onkeyup="filtrarEstudiantes()">
                     <div class="container_Table">
                         <div id="seccionspinner"></div>
                         <div id="mensajes"></div>
@@ -92,8 +92,8 @@
                 <form id="formularioEditar">
                     <div class="mb-3">
                         <label for="" class="form-label">Id</label>
-                        <input type="hidden" id="id" name="id">
-                        <span id="idEditar"></span>
+                        <input type="hidden" id="idEstudiante" name="ididEstudiante">
+                        <span id="idEditarEstudiante"></span>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Nombre</label>
@@ -106,7 +106,7 @@
                             placeholder="" readonly />
                     </div>
                     <div class="mb-3">
-                        <label for="" class="form-label">CarnetEstudiante</label>
+                        <label for="" class="form-label">Carnet Estudiante</label>
                         <input type="text" class="form-control" name="carnetEstudiante" id="carnetEstudiante" aria-describedby="helpId"
                             placeholder="" readonly />
                     </div>
@@ -127,8 +127,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Estado</label>
-                        <input type="text" class="form-control" name="estado" id="estado" aria-describedby="helpId"
-                            placeholder="" required />
+                        <select class="form-select" name="estado" id="estado" >
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+
+                        </select>
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary espacio">Enviar</button>

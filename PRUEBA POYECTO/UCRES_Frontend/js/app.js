@@ -1,6 +1,5 @@
 Chart.defaults.color = '#fff'
 Chart.defaults.borderColor = '#444'
-
 let tittle = document.title;
 let graficos = 'Graficas';
 let graficos2 = 'Graficas2';
@@ -96,15 +95,15 @@ const printCharts = () => {
 
 }
 
-const renderMatriculaxProvinciaChart = (Estudiantes) => {
+const renderMatriculaxProvinciaChart = (Estudiantes,year) => {
 
     const EstudiantesRecidenciaxanno = Estudiantes.map(EstudiantesRecidenciaxanno => EstudiantesRecidenciaxanno.cantidad)
     const ubicaciones = Estudiantes.map(ubicacion => ubicacion.recidencia)
-
+    console.log(year)
     const data = {
         labels: ubicaciones,
         datasets: [{
-            label: '2020',
+            label: year,
             data: EstudiantesRecidenciaxanno,
             tension: 1,
             borderColor: getDataColors(),
@@ -163,13 +162,12 @@ const renderCantidadCarrerasDeseadas = (carreraDeseadasCantidad) => {
 const renderObtenerMatriculasxSedeyAnio = (MatrSedexAnio) => {
     const ListaSedes = MatrSedexAnio.map(matrSedexAnio => matrSedexAnio.nombreSede)
     const Cantidad = MatrSedexAnio.map(matrSedexAnio => matrSedexAnio.cantidad)
-
-
+    
 
     const data = {
         labels: ListaSedes,
         datasets: [{
-            label: '2020',
+            //label: '2020',
             data: Cantidad,
             tension: 1,
             borderColor: getDataColors(),

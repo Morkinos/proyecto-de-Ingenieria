@@ -121,7 +121,7 @@ function pintarRegistroEstudiantes(objetodatos) {
                 <td>${item.telefono}</td>
                 <td>${item.carreraDeseada}</td>
                 <td>${item.sedeMatriculada}</td>
-                <td>${item.estado}</td>
+                <td class="estado">${item.estado}</td>
                 <td>
                 <a name="" id="" class="btn btn-primary no-effect" onclick="editarRegistroEstudiante('${encodeURIComponent(JSON.stringify(item))}')" role="button">Editar</a>
                 <a name="" id="" class="btn btn-danger no-effect" onclick="eliminarRegistroEstudiante('${item.idRegistro}')" role="button">Eliminar</a>
@@ -137,6 +137,14 @@ function pintarRegistroEstudiantes(objetodatos) {
 /*ELIMINAR REGISTRO ESTUDIANTE */
 // Función para abrir el modal de eliminación de registro de estudiante
 function eliminarRegistroEstudiante(id) {
+    const fila = document.querySelector(`#fila-registro-${id}`);
+    const estado = fila.querySelector('.estado').textContent.trim();
+
+    if (estado === "Inactivo") {
+        mostrarMensaje("El redistro de ese estudiante ya está inactivo.", 'warning');
+        return;
+    }
+
     modalEliminar = new bootstrap.Modal(document.getElementById("modalEliminar"));
     modalEliminar.show();
     document.getElementById("idEliminar").innerHTML = id;
@@ -156,24 +164,24 @@ function modalConfirmacionEliminarRegistroEstudiante() {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.exito === true) {
-            // Eliminación exitosa
-            mostrarMensaje("El registro de estudiante ha sido eliminado correctamente.", 'success');
-            modalEliminar.hide(); // Cerrar el modal
-            setTimeout(() => {
-                cargarRegistroEstudiantes(); // Actualizar la lista después de eliminar
-            }, 3000);
-        } else {
-            // Manejar el error
-            mostrarMensaje("Hubo un error al eliminar el registro de estudiante.", 'warning');
-        }
-    })
-    .catch(error => {
-        console.error('Error al eliminar el registro de estudiante:', error);
-        mostrarMensaje("Hubo un error al eliminar el registro de estudiante.", 'danger');
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.exito === true) {
+                // Eliminación exitosa
+                mostrarMensaje("El registro de estudiante ha sido eliminado correctamente.", 'success');
+                modalEliminar.hide(); // Cerrar el modal
+                setTimeout(() => {
+                    cargarRegistroEstudiantes(); // Actualizar la lista después de eliminar
+                }, 3000);
+            } else {
+                // Manejar el error
+                mostrarMensaje("Hubo un error al eliminar el registro de estudiante.", 'warning');
+            }
+        })
+        .catch(error => {
+            console.error('Error al eliminar el registro de estudiante:', error);
+            mostrarMensaje("Hubo un error al eliminar el registro de estudiante.", 'danger');
+        });
 }
 
 // Función para abrir el modal de edición de registro de estudiante
@@ -215,25 +223,25 @@ document.getElementById('formularioEditarRegistroEstudiante').addEventListener('
             'Content-Type': 'application/json'
         }
     })
-    .then(respuesta => respuesta.json())
-    .then((datosrepuestas) => {
-        if (datosrepuestas.exito === true) {
-            mostrarMensaje("Modificación exitosa.", 'success');
-            setTimeout(() => {
-                cargarRegistroEstudiantes();
-                window.location.href = "ListaMatriculas.html";
-            }, 500);
-        } else {
-            mostrarMensaje("Algo falló.", 'warning');
-        }
-    })
-    .catch(console.log);
+        .then(respuesta => respuesta.json())
+        .then((datosrepuestas) => {
+            if (datosrepuestas.exito === true) {
+                mostrarMensaje("Modificación exitosa.", 'success');
+                setTimeout(() => {
+                    cargarRegistroEstudiantes();
+                    window.location.href = "ListaMatriculas.html";
+                }, 500);
+            } else {
+                mostrarMensaje("Algo falló.", 'warning');
+            }
+        })
+        .catch(console.log);
 });
 
 /**BUSCAR */
 function filtrarRegistrosEstudiantes() {
     const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-    const estudiantesFiltrados = registrosEstudiantes.filter(registro => 
+    const estudiantesFiltrados = registrosEstudiantes.filter(registro =>
         (registro.carnetEstudiante && registro.carnetEstudiante.toLowerCase().includes(searchTerm)) ||
         (registro.numeroCedula && registro.numeroCedula.toString().toLowerCase().includes(searchTerm))
     );

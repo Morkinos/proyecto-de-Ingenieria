@@ -1,4 +1,5 @@
 
+
 function URLdatosEstudiantes() {
     let annio = localStorage.getItem('AniosOptions');
     let url = `https://localhost:7192/Estudiantes/ObtenerEstudianteRecidenciaxanno?anno=${annio}`;
@@ -8,7 +9,6 @@ function URLdatosEstudiantes() {
 function ObternerCantMatriculasxSedexAnio() {
     let anno = localStorage.getItem('OpcionesAnios');
     let url = `https://localhost:7192/RegistroEstudiantes/ObternerCantMatriculasxSedexAnio?anio=${anno}`;
-    console.log('mammey' + anno);
     return url;
 }
 
@@ -55,15 +55,14 @@ const Cambio = () => {
 const enableEventHandlers = () => {
     document.querySelector('#AniosOptions').onchange = e => {
         const { value: property, text: label } = e.target.selectedOptions[0];
-
+        const  year = e.target.value;
         const urlEstudianteRecidenciaxanno = URLdatosEstudiantes();
-
+        
         fetchAPIData(urlEstudianteRecidenciaxanno).then(
             ([EstudiantesRecidenciaxanno]) => {
                 const data = EstudiantesRecidenciaxanno.map(EstudiantesRecidenciaxanno => EstudiantesRecidenciaxanno.cantidad);
                 const labels = EstudiantesRecidenciaxanno.map(ubicacion => ubicacion.recidencia);
-
-                updateChartData('ChartCantMatricxAnioxProvinc', data, labels);
+                updateChartData('ChartCantMatricxAnioxProvinc', data, labels,year);
             }
         );
     };
@@ -78,6 +77,7 @@ const CambioEstTrasl = () => {
         fetchAPIData(urlObtenerCantEstudiantesTransladoxanio).then(
             ([EstudTrasTotal]) => {
                 const data = EstudTrasTotal.map(EstudTrasTotal => EstudTrasTotal.cantidad);
+
                 const labels = ['Cantidad']
                 updateChartData('ObtenerCantEstudiantesTransladoxanio', data, labels);
             }

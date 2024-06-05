@@ -415,3 +415,9 @@ input{
     margin-top: 3%;
 }
 
+/*prueba*/
+#mensajes {
+  float: left;
+  width: 100%;
+  text-align: left;
+}

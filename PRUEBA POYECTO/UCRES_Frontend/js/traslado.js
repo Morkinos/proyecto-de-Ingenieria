@@ -94,10 +94,11 @@ function pintarTraslados(objetodatos) {
                 <td>${item.motivoTraslado}</td>
                 <td>
                 <a name="" id="" class="btn btn-primary no-effect" onclick="editarTraslado('${encodeURIComponent(JSON.stringify(item))}')" role="button">Editar</a>
-                <a name="" id="" class="btn btn-danger no-effect" onclick="eliminarTraslado('${item.idTraslado}')" role="button">Eliminar</a>
+                <!--<a name="" id="" class="btn btn-danger no-effect" onclick="eliminarTraslado('${item.idTraslado}')" role="button">Eliminar</a> -->
             </td>
             </tr>`;
         }
+        //comente el boton de eliminar
     } else {
         mostrarMensaje('Error: El objeto de datos no es un arreglo.', 'danger');
     }
