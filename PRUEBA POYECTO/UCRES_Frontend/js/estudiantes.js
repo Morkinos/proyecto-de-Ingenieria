@@ -44,13 +44,13 @@ if (nombrePagina == crearPagina) {
             if (this.checked) {
                 trasladoFields.style.display = 'block';
                 // Añadir 'required' a los campos de traslado
-                document.getElementById('lugarRecidencia').required = true;
+                document.getElementById('lugarResidencia').required = true;
                 document.getElementById('lugarMatriculado').required = true;
                 document.getElementById('motivoTraslado').required = true;
             } else {
                 trasladoFields.style.display = 'none';
                 // Quitar 'required' de los campos de traslado
-                document.getElementById('lugarRecidencia').required = false;
+                document.getElementById('lugarResidencia').required = false;
                 document.getElementById('lugarMatriculado').required = false;
                 document.getElementById('motivoTraslado').required = false;
             }
@@ -71,7 +71,7 @@ if (nombrePagina == crearPagina) {
         document.getElementById('formulario').addEventListener('submit', function (event) {
             localStorage.removeItem('idCarreraSeleccionada');
             localStorage.removeItem('nombreSedeSeleccionada');
-            localStorage.removeItem('lugarRecidencia');
+            localStorage.removeItem('lugarResidencia');
         });
     });
 
@@ -107,7 +107,7 @@ if (nombrePagina == crearPagina) {
         fetch('https://localhost:7192/Sedes/Listado')
             .then(response => response.json())
             .then(data => {
-                llenarOpcionesSede(data, 'lugarRecidencia');
+                llenarOpcionesSede(data, 'lugarResidencia');
                 //llenarOpcionesSede(data, 'lugarMatriculado');
             })
             .catch(error => console.error('Error al obtener las sedes:', error));
@@ -118,8 +118,8 @@ if (nombrePagina == crearPagina) {
     };
 }
 if (nombrePagina == crearPagina) {
-    document.getElementById("lugarRecidencia").addEventListener("change", function () {
-        localStorage.setItem('lugarRecidencia', this.value);
+    document.getElementById("lugarResidencia").addEventListener("change", function () {
+        localStorage.setItem('lugarResidencia', this.value);
     });
 }
 
@@ -134,7 +134,7 @@ if (nombrePagina == crearPagina) {
             cedula: datos.get('cedula'),
             carnetEstudiante: datos.get('carnetEstudiante'),
             correo: datos.get('correo'),
-            recidencia: datos.get('recidencia'),
+            residencia: datos.get('residencia'),
             telefono: datos.get('telefono'),
             estado: 'Activo'
         };
@@ -209,18 +209,18 @@ function insertarRegistroEstudiantes(idEstudiante, datos) {
 }
 
 function insertarTraslado(idEstudiante, datos) {
-    let lugarRecidencia = datos.get('lugarRecidencia');
+    let lugarResidencia = datos.get('lugarResidencia');
     let lugarDeTraslado = datos.get('lugarMatriculado');
 
     // Verificar que el lugar de residencia y el lugar matriculado no sean el mismo
-    if (lugarRecidencia === lugarDeTraslado) {
+    if (lugarResidencia === lugarDeTraslado) {
         mostrarMensaje('El lugar de residencia y el lugar matriculado no pueden ser el mismo', 'warning');
         return; // No continuar con la solicitud
     }
 
     let datosTraslado = {
         idEstudiante: idEstudiante,
-        lugarRecidencia: lugarRecidencia,
+        lugarResidencia: lugarResidencia,
         lugarDeTraslado: lugarDeTraslado,
         motivoTraslado: datos.get('motivoTraslado')
     };
@@ -301,7 +301,7 @@ function pintardatos(objetodatos) {
                 <td data-label="Cédula">${item.cedula}</td>
                 <td data-label="Carnet Estudiante">${item.carnetEstudiante}</td>
                 <td data-label="Correo">${item.correo}</td>
-                <td data-label="Residencia">${item.recidencia}</td>
+                <td data-label="Residencia">${item.residencia}</td>
                 <td data-label="Teléfono">${item.telefono}</td>
                 <td data-label="Estado" class="estado">${item.estado}</td>
                 <td data-label="Acciones">
@@ -355,7 +355,7 @@ if (nombrePagina == listaEstudiante) {
             cedula: datos.get('cedula'),
             carnetEstudiante: datos.get('carnetEstudiante'),
             correo: datos.get('correo'),
-            recidencia: datos.get('recidencia'),
+            residencia: datos.get('residencia'),
             telefono: datos.get('telefono'),
             estado: datos.get('estado'),
         };
@@ -387,7 +387,7 @@ function editar(datos) {
     document.getElementById("cedula").value = objeto.cedula;
     document.getElementById("carnetEstudiante").value = objeto.carnetEstudiante;
     document.getElementById("correo").value = objeto.correo;
-    document.getElementById("recidencia").value = objeto.recidencia;
+    document.getElementById("residencia").value = objeto.residencia;
     document.getElementById("telefono").value = objeto.telefono;
     document.getElementById("estado").value = objeto.estado;
     document.getElementById("idEditarEstudiante").innerHTML = objeto.idEstudiante;

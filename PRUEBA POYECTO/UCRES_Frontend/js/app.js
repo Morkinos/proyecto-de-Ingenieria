@@ -98,7 +98,7 @@ const printCharts = () => {
 const renderMatriculaxProvinciaChart = (Estudiantes,year) => {
 
     const EstudiantesRecidenciaxanno = Estudiantes.map(EstudiantesRecidenciaxanno => EstudiantesRecidenciaxanno.cantidad)
-    const ubicaciones = Estudiantes.map(ubicacion => ubicacion.recidencia)
+    const ubicaciones = Estudiantes.map(ubicacion => ubicacion.residencia)
     console.log(year)
     const data = {
         labels: ubicaciones,

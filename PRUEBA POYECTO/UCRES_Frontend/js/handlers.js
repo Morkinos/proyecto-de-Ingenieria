@@ -61,7 +61,7 @@ const enableEventHandlers = () => {
         fetchAPIData(urlEstudianteRecidenciaxanno).then(
             ([EstudiantesRecidenciaxanno]) => {
                 const data = EstudiantesRecidenciaxanno.map(EstudiantesRecidenciaxanno => EstudiantesRecidenciaxanno.cantidad);
-                const labels = EstudiantesRecidenciaxanno.map(ubicacion => ubicacion.recidencia);
+                const labels = EstudiantesRecidenciaxanno.map(ubicacion => ubicacion.residencia);
                 updateChartData('ChartCantMatricxAnioxProvinc', data, labels,year);
             }
         );

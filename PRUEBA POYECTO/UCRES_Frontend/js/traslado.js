@@ -89,7 +89,7 @@ function pintarTraslados(objetodatos) {
                 <td>${item.idEstudiante}</td>
                 <td>${item.cedula}</td>
                 <td>${item.carnetEstudiante}</td>
-                <td>${item.lugarRecidencia}</td>
+                <td>${item.lugarResidencia}</td>
                 <td>${item.lugarDeTraslado}</td>
                 <td>${item.motivoTraslado}</td>
                 <td>
@@ -150,7 +150,7 @@ function editarTraslado(datos) {
 
     document.getElementById("idTraslado").value = objeto.idTraslado;
     document.getElementById("idEstudiante").value = objeto.idEstudiante;
-    document.getElementById("lugarRecidencia").value = objeto.lugarRecidencia;
+    document.getElementById("lugarResidencia").value = objeto.lugarResidencia;
     document.getElementById("lugarDeTraslado").value = objeto.lugarDeTraslado;
     document.getElementById("motivoTraslado").value = objeto.motivoTraslado;
     document.getElementById("idEditarTraslado").innerHTML = objeto.idTraslado;
@@ -164,7 +164,7 @@ document.getElementById('formularioEditarTraslado').addEventListener('submit', f
     let datosEnviar = {
         idTraslado: datos.get('idTraslado'),
         idEstudiante: datos.get('idEstudiante'),
-        lugarRecidencia: datos.get('lugarRecidencia'),
+        lugarResidencia: datos.get('lugarResidencia'),
         lugarDeTraslado: datos.get('lugarDeTraslado'),
         motivoTraslado: datos.get('motivoTraslado')
     };
