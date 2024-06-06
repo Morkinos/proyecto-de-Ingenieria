@@ -3,14 +3,14 @@ CREATE OR ALTER PROCEDURE ObtenerEstudiantesPorProvincia
     @Anio INT
 AS
 BEGIN
-    SELECT E.Recidencia, COALESCE(COUNT(RE.IdEstudiante), 0) AS Cantidad
+    SELECT E.Residencia, COALESCE(COUNT(RE.IdEstudiante), 0) AS Cantidad
     FROM Estudiantes E
     INNER JOIN RegistroEstudiantes RE ON E.idEstudiante = RE.IdEstudiante
     --INNER JOIN Carreras C ON C.idCarrera = RE.IdCarrera 
     --INNER JOIN Sedes S ON S.IdSede = C.idSede
     --INNER JOIN Ubicaciones U ON U.IdUbicacion = S.IdUbicacion
     WHERE RE.Año = @Anio  and RE.Estado ='Activo'
-    GROUP BY E.Recidencia;
+    GROUP BY E.Residencia;
 END;
 EXECUTE ObtenerEstudiantesPorProvincia @Anio=2024;
 
@@ -116,14 +116,14 @@ Exec AniosDisponibles;
 CREATE OR ALTER  PROCEDURE CantTotalEstuxProvAll
 AS
 BEGIN
-    SELECT E.Recidencia  , COALESCE(COUNT(E.IdEstudiante), 0) AS Cantidad
+    SELECT E.Residencia  , COALESCE(COUNT(E.IdEstudiante), 0) AS Cantidad
     FROM Estudiantes E
     INNER JOIN RegistroEstudiantes RE ON E.idEstudiante = RE.IdEstudiante
     --INNER JOIN Carreras C ON C.idCarrera = RE.IdCarrera 
     --INNER JOIN Sedes S ON S.IdSede = C.idSede
     --INNER JOIN Ubicaciones U ON U.IdUbicacion = S.IdUbicacion
     WHERE RE.Estado ='Activo'
-    GROUP BY E.Recidencia;
+    GROUP BY E.Residencia;
 END;
 EXECUTE CantTotalEstuxProvAll ;
 ------------------------------------------------------------------------------------------idk

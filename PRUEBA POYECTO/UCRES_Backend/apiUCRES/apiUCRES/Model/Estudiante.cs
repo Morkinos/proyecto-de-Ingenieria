@@ -27,12 +27,12 @@ namespace apiUCRES.Model
         [StringLength(50)] //otra manera de definir el tamaño maximo del string
         public string Correo { get; set; }
 
-        [Required(ErrorMessage = "Por favor digite la Recidencia")]
+        [Required(ErrorMessage = "Por favor digite la Residencia")]
         [DataType(DataType.Text)] //decir el tipo de dato del atributo
         [MaxLength(50)] //definir el maximo de caracteres
         [MinLength(1)]//definir el minimo de caracteres
         [StringLength(50)] //otra manera de definir el tamaño maximo del string
-        public string Recidencia { get; set; }
+        public string Residencia { get; set; }
 
         [Required(ErrorMessage = "Por favor digite el Telefono")]
         [DataType(DataType.PhoneNumber)] //decir el tipo de dato del atributo

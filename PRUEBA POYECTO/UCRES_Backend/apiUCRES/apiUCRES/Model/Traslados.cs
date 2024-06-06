@@ -8,12 +8,12 @@ namespace apiUCRES.Model
         public int IdTraslado { get; set; }
         public int IdEstudiante { get; set; }
 
-        [Required(ErrorMessage = "Por favor digite el Lugar de Recidencia")]
+        [Required(ErrorMessage = "Por favor digite el Lugar de Residencia")]
         [DataType(DataType.Text)] //decir el tipo de dato del atributo
         [MaxLength(50)] //definir el maximo de caracteres
         [MinLength(5)]//definir el minimo de caracteres
         [StringLength(50)] //otra manera de definir el tamaño maximo del string
-        public string LugarRecidencia { get; set; }
+        public string LugarResidencia { get; set; }
 
         [Required(ErrorMessage = "Por favor digite el Lugar de Traslado")]
         [DataType(DataType.Text)] //decir el tipo de dato del atributo

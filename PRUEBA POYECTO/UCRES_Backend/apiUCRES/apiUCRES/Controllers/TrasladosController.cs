@@ -59,23 +59,24 @@ namespace apiUCRES.Controllers
 
 
         [HttpPost("Modificar")]
-        public string Modificar(Traslados traslados)
+        public IActionResult Modificar(Traslados traslados)
         {
-            string mensaje = "No se logró aplicar los cambios";
-
+            var respuesta = new RespuestaApi();
             try
             {
                 _contexto.Traslados.Update(traslados);
                 _contexto.SaveChanges();
-
-                mensaje = "Cambios aplicados correctamente";
+                respuesta.Exito = true;
+                respuesta.Mensaje = "Traslado agregado correctamente";
+                respuesta.IdEstudiante = traslados.IdTraslado; // Asegúrate de que Id es la clave primaria y se genera al guardar
             }
             catch (Exception ex)
             {
-                mensaje = "Error: " + ex.Message;
+                respuesta.Exito = false;
+                respuesta.Mensaje = "Error: " + ex.Message;
             }
 
-            return mensaje;
+            return Ok(respuesta);
         }
 
         //--------------------Aca comiensal las solicitudes de los SP 

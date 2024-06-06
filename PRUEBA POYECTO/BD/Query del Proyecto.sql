@@ -92,6 +92,8 @@ REFERENCES Sedes(IdSede);
 ALTER TABLE Sedes
 ADD CONSTRAINT FK_Sedes_Ubicaciones FOREIGN KEY (IdUbicacion)
 REFERENCES Ubicaciones(IdUbicacion);
+----------------------------------------------------------------------------
+
 
 
 
