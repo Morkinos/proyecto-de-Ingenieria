@@ -53,20 +53,21 @@ namespace apiUCRES.Controllers
             var respuesta = new RespuestaApi();
             try
             {
+                // Añadir el nuevo registro de estudiante al contexto de la base de datos
                 _contexto.RegistroEstudiantes.Add(registroE);
-                _contexto.SaveChanges();
+                _contexto.SaveChanges(); // Guardar cambios en la base de datos
 
                 respuesta.Exito = true;
                 respuesta.Mensaje = "Estudiante registrado correctamente";
-                respuesta.IdEstudiante = registroE.IdEstudiante; // Asegúrate de que Id es la clave primaria y se genera al guardar
+                respuesta.IdEstudiante = registroE.IdEstudiante; // Devolver el ID del estudiante registrado
+                return Ok(respuesta); // Retorna un código de estado 200 con los detalles del éxito
             }
             catch (Exception ex)
             {
                 respuesta.Exito = false;
                 respuesta.Mensaje = "Error: " + ex.Message;
+                return StatusCode(500, respuesta); // Retorna un código de estado 500 con el mensaje de error
             }
-
-            return Ok(respuesta);
         }
 
         [HttpPost("Eliminar")]

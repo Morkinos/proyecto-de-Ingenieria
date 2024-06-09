@@ -125,8 +125,16 @@ if (nombrePagina == crearPagina) {
 
 if (nombrePagina == crearPagina) {
     formulario.addEventListener("submit", function (evento) {
+        console.log("Formulario enviado");
         evento.preventDefault();
 
+        let anioElement = document.getElementById('Año'); // Asegúrate de que el ID es correcto.
+        let anio = parseInt(anioElement.value); // Convertir el valor a número.
+
+        if (anio <= 2020){
+            mostrarMensaje('El año debe ser mayor o igual a 2020','warning');
+            return;
+        }
         let datos = new FormData(formulario);
 
         let datosEstudiantes = {
@@ -138,8 +146,8 @@ if (nombrePagina == crearPagina) {
             telefono: datos.get('telefono'),
             estado: 'Activo'
         };
-        console.log(datosEstudiantes)
-        console.log(urlEstudiantes + insertar)
+        //console.log(datosEstudiantes)
+        //console.log(urlEstudiantes + insertar)
 
         fetch(urlEstudiantes + insertar, {
             method: 'POST',
@@ -152,28 +160,21 @@ if (nombrePagina == crearPagina) {
             .then(datosRespuesta => {
                 if (datosRespuesta.exito) {
                     let idEstudiante = datosRespuesta.idEstudiante;
-                    insertarRegistroEstudiantes(idEstudiante, datos);
+                    insertarRegistroEstudiantes(idEstudiante, datos,anio);
                 } else {
-                    mostrarMensaje(datosRespuesta.Mensaje, 'warning');
+                    mostrarMensaje(datosRespuesta.mensaje, 'warning');
                 }
             })
             .catch(console.log);
     });
 }
 
-function insertarRegistroEstudiantes(idEstudiante, datos) {
-    let anoMatricula = parseInt(datos.get('Año'));
-
-    // Verificar que el año de matrícula sea mayor a 2020
-    if (anoMatricula < 2020) {
-        mostrarMensaje('El año de matrícula debe ser mayor a 2020', 'warning');
-        return; // No continuar con la solicitud
-    }
-
+function insertarRegistroEstudiantes(idEstudiante, datos,anio) {
+    console.log('entre')
     let datosRegistro = {
         idEstudiante: idEstudiante,
         idCarrera: datos.get('idCarreras'),
-        Año: anoMatricula,
+        Año: anio,
         CarreraDeseada: datos.get('CarreraDeseada'),
         estado: 'Activo'
     };
@@ -199,7 +200,7 @@ function insertarRegistroEstudiantes(idEstudiante, datos) {
                     mostrarMensaje('Estudiante añadido exitosamente!', 'success');
                 }
             } else {
-                mostrarMensaje(datosRespuesta.Mensaje, 'warning');
+                mostrarMensaje(datosRespuesta.mensaje, 'warning');
             }
         })
         .catch(error => {
@@ -214,7 +215,7 @@ function insertarTraslado(idEstudiante, datos) {
 
     // Verificar que el lugar de residencia y el lugar matriculado no sean el mismo
     if (lugarResidencia === lugarDeTraslado) {
-        mostrarMensaje('El lugar de residencia y el lugar matriculado no pueden ser el mismo', 'warning');
+        mostrarMensaje('El lugar de residencia y el lugar matriculado no pueden ser el mismo','warning');
         return; // No continuar con la solicitud
     }
 
@@ -245,7 +246,7 @@ function insertarTraslado(idEstudiante, datos) {
             if (datosRespuesta.exito) {
                 mostrarMensaje('Estudiante y traslado añadidos exitosamente!', 'success');
             } else {
-                mostrarMensaje(datosRespuesta.Mensaje, 'warning');
+                mostrarMensaje(datosRespuesta.mensaje, 'warning');
             }
         })
         .catch(error => {
@@ -255,11 +256,18 @@ function insertarTraslado(idEstudiante, datos) {
 }
 
 function mostrarMensaje(mensaje, tipo) {
+    console.log("Llamada a mostrarMensaje:", mensaje, tipo); // Esto confirmará si la función se está llamando
+    let mensajes = document.getElementById('mensajes');
+    if (!mensajes) {
+        console.error('El elemento para mostrar mensajes no fue encontrado.');
+        return;
+    }
     mensajes.innerHTML = `<div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         <strong>${mensaje}</strong>
     </div>`;
 }
+
 
 /*--------------------------------------AHORA LAS FUNCIONES PARA LA LISTA DE ESTUDIANTES---------------------------------------------------------------*/
 
@@ -325,7 +333,7 @@ function filtrarEstudiantes() {
     pintardatos(estudiantesFiltrados);
 }
 
-function mostrarMensaje(mensaje, tipo) {
+/*function mostrarMensaje(mensaje, tipo) {
     const mensajes = document.getElementById('mensajes');
     mensajes.innerHTML = `
         <div class="alert alert-${tipo}" role="alert">
@@ -334,7 +342,7 @@ function mostrarMensaje(mensaje, tipo) {
     setTimeout(() => {
         mensajes.innerHTML = '';
     }, 5000); // Elimina el mensaje después de 5 segundos
-}
+}*/
 
 function cargarspinner() {
     document.getElementById("seccionspinner").innerHTML = spinner;
@@ -418,7 +426,7 @@ function editarDatos(datosrepuestas) {
 
 /*ELIMINAR ESTUDIANTE */
 
-function mostrarMensaje(mensaje, tipo) {
+/*function mostrarMensaje(mensaje, tipo) {
     const mensajes = document.getElementById('mensajes');
     
     mensajes.innerHTML = `
@@ -429,7 +437,7 @@ function mostrarMensaje(mensaje, tipo) {
     setTimeout(() => {
         mensajes.innerHTML = '';
     }, 5000); // Elimina el mensaje después de 5 segundos
-}
+}*/
 
 // Variable global para el modal
 

@@ -12,7 +12,7 @@ namespace apiUCRES.Model
         public int Año { get; set; }
         [Required(ErrorMessage = "Por favor digite la Carrera deseada")]
         [DataType(DataType.Text)] //decir el tipo de dato del atributo
-        [MaxLength(50)] //definir el maximo de caracteres
+        [MaxLength(5)] //definir el maximo de caracteres
         [StringLength(2)] //otra manera de definir el tamaño maximo del string
         public string CarreraDeseada { get; set; }
 

@@ -9,14 +9,14 @@ namespace apiUCRES.Model
 
         [Required(ErrorMessage = "Por favor digite el Nombre")]
         [DataType(DataType.Text)] //decir el tipo de dato del atributo
-        [MaxLength(50)] //definir el maximo de caracteres
+        [MaxLength(100)] //definir el maximo de caracteres
         [StringLength(100)] //otra manera de definir el tamaño maximo del string
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "Por favor digite el Cedula")]
         [DataType(DataType.Text)] //decir el tipo de dato del atributo
-        [MaxLength(50)] //definir el maximo de caracteres
-        [MinLength(9)]//definir el minimo de caracteres
+        [MaxLength(13)] //definir el maximo de caracteres
+        [MinLength(7)]//definir el minimo de caracteres
         [StringLength(12)] //otra manera de definir el tamaño maximo del string
         public string Cedula { get; set; }
 
