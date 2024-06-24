@@ -420,4 +420,5 @@ input{
   float: left;
   width: 100%;
   text-align: left;
+  color: white; /* Asegúrate de que el color del texto sea visible sobre el fondo */
 }

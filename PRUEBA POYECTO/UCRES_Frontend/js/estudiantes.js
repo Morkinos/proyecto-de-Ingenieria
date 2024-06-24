@@ -108,7 +108,6 @@ if (nombrePagina == crearPagina) {
             .then(response => response.json())
             .then(data => {
                 llenarOpcionesSede(data, 'lugarResidencia');
-                //llenarOpcionesSede(data, 'lugarMatriculado');
             })
             .catch(error => console.error('Error al obtener las sedes:', error));
     }
@@ -326,14 +325,17 @@ function pintardatos(objetodatos) {
 
 function filtrarEstudiantes() {
     const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-    const estudiantesFiltrados = estudiantes.filter(estudiante => 
-        estudiante.cedula.toLowerCase().includes(searchTerm) ||
-        estudiante.carnet.toLowerCase().includes(searchTerm) // Agrega esta línea
-    );
+    const estudiantesFiltrados = estudiantes.filter(estudiante => {
+        const cedula = estudiante.cedula ? estudiante.cedula.toLowerCase() : '';
+        const carnet = estudiante.carnetEstudiante ? estudiante.carnetEstudiante.toLowerCase() : '';
+        return cedula.includes(searchTerm) || carnet.includes(searchTerm);
+    });
+    console.log(estudiantesFiltrados);
     pintardatos(estudiantesFiltrados);
 }
 
-/*function mostrarMensaje(mensaje, tipo) {
+
+function mostrarMensaje(mensaje, tipo) {
     const mensajes = document.getElementById('mensajes');
     mensajes.innerHTML = `
         <div class="alert alert-${tipo}" role="alert">
@@ -342,7 +344,7 @@ function filtrarEstudiantes() {
     setTimeout(() => {
         mensajes.innerHTML = '';
     }, 5000); // Elimina el mensaje después de 5 segundos
-}*/
+}
 
 function cargarspinner() {
     document.getElementById("seccionspinner").innerHTML = spinner;
@@ -358,14 +360,14 @@ if (nombrePagina == listaEstudiante) {
         let datos = new FormData(formularioEditar);
 
         let datosEnviar = {
-            idEstudiante: datos.get('id'),
+            idEstudiante: datos.get('idEstudiante'),
             nombre: datos.get('nombre'),
             cedula: datos.get('cedula'),
             carnetEstudiante: datos.get('carnetEstudiante'),
             correo: datos.get('correo'),
             residencia: datos.get('residencia'),
             telefono: datos.get('telefono'),
-            estado: datos.get('estado'),
+            estado: datos.get('estado')
         };
 
         console.log(JSON.stringify(datosEnviar));
@@ -426,7 +428,7 @@ function editarDatos(datosrepuestas) {
 
 /*ELIMINAR ESTUDIANTE */
 
-/*function mostrarMensaje(mensaje, tipo) {
+function mostrarMensaje(mensaje, tipo) {
     const mensajes = document.getElementById('mensajes');
     
     mensajes.innerHTML = `
@@ -437,10 +439,7 @@ function editarDatos(datosrepuestas) {
     setTimeout(() => {
         mensajes.innerHTML = '';
     }, 5000); // Elimina el mensaje después de 5 segundos
-}*/
-
-// Variable global para el modal
-
+}
 
 // Función para abrir el modal de eliminación
 function eliminar(id) {

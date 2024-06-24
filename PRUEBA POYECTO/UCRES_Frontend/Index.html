@@ -1,69 +1,256 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Inicio</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/index.css">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 
+    - primary meta tag
+  -->
+  <title>Estadistica Ucr</title>
+  <meta name="title" content="EduWeb - The Best Program to Enroll for Exchange">
+  <meta name="description" content="This is an education html template made by codewithsadee">
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <!-- 
+    - custom css link
+  -->
+<link rel="stylesheet" href="CSS/Prueba.css">
+  <link rel="stylesheet" href="CSS/style.css">
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800&family=Poppins:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- 
+    - preload images
+  -->
+  <link rel="preload" as="image" href="./assets/images/hero-bg.svg">
+  <link rel="preload" as="image" href="./assets/images/hero-banner-1.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-banner-2.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-shape-1.svg">
+  <link rel="preload" as="image" href="./assets/images/hero-shape-2.png">
+
 </head>
-<body>
-    <header class="header" id="navbar">
-    </header>
-    <main>
-        <section class="index container">
-            <div class="index_1">
-                <h2><span>Estadistica UCR </span </h2>
-                <p>
-                La Universidad de Costa Rica (UCR) es una de las instituciones educativas más prestigiosas y reconocidas del país. 
-                Fundada en 1940, la UCR se destaca por su compromiso con la excelencia académica, la investigación y la extensión
-                 social. Ofrece una amplia variedad de carreras y programas de posgrado, atendiendo a diversas disciplinas y 
-                 fomentando el desarrollo integral de sus estudiantes. La UCR también se caracteriza por su fuerte enfoque en la 
-                 innovación y el pensamiento crítico, así como por su activa participación en proyectos que benefician a la comunidad
-                  costarricense. Con campus en varias regiones del país, la UCR facilita el acceso a la educación superior de calidad 
-                  para una amplia población estudiantil.
+
+<body id="top">
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" id="navbar" >
+    <div></div>
+</header>
+
+  <main>
+    <article >
+
+
+      <section class="section hero has-bg-image" id="home" aria-label="home"
+        style="margin-top: 50px ;background-image: url('img/fondo2.jpg')" >
+        <div class="container">
+
+          <div class="hero-content">
+
+            <h1 class="h1 section-title">
+              Estadísticas de la <span class="span">UCR</span> de los traslados de los estudiantes
+            </h1>
+
+            <p class="hero-text">
+                La Universidad de Costa Rica (UCR) realiza un análisis estadístico detallado sobre la movilidad estudiantil. Este estudio visualiza las distancias y tiempos de viaje de los estudiantes, proporcionando información clave para desarrollar políticas que mejoren la accesibilidad y experiencia educativa.
+            </p>
+
+            <a href="Seleccion.html" class="btn has-before">
+              <span class="span">Sección de gráficos</span>
+
+              <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+            </a>
+
+          </div>
+
+          <figure class="hero-banner">
+
+            <div class="img-holder one" style="--width: 270; --height: 300;">
+              <img src="img/foraneo.jpg" width="270" height="300" alt="hero banner" class="img-cover">
+            </div>
+
+            <div class="img-holder two" style="--width: 240; --height: 370;">
+              <img src="img/presas.jpg" width="240" height="370" alt="hero banner" class="img-cover">
+            </div>
+
+            <!--<img src="img/index_Pacifico.jpg" width="380" height="300" alt="" class="shape hero-shape-1">
+
+            <img src="img/fondo_calles.webp" width="622" height="551" alt="" class="shape hero-shape-2"> -->
+
+          </figure>
+
+        </div>
+      </section>
+
+
+
+
+
+      <!-- 
+        - #CATEGORY
+      -->
+
+      <section class="section category" aria-label="category">
+        <div class="container">
+
+          <p class="section-subtitle">Gráficos</p>
+
+          <h2 class="h2 section-title">
+            Nuestros <span class="span">principales</span> gráficos.
+          </h2>
+
+          <p class="section-text">
+            Descubre los datos clave sobre la movilidad estudiantil en la Universidad de Costa Rica (UCR) a través de nuestros gráficos detallados y visualmente impactantes.
+          </p>
+
+          <ul class="grid-list">
+
+            <li>
+              <div class="category-card" style="--color: 170, 75%, 41%">
+
+                <div class="card-icon">
+                  <img src="img/IMGGraficos.jpg" width="40" height="40" loading="lazy"
+                    alt="Online Degree Programs" class="img">
+                </div>
+
+                <h3 class="h3">
+                  <a href="Graficos.html" class="card-title">Matriculas por año  en las provincias</a>
+                </h3>
+
+                <p class="card-text">
+                    Visualiza la distribución de matrículas en las provincias a través de los años.
                 </p>
-            </div>
-            <div class="index_1">
-                <img src="img/index_UCR.jpg" alt="UCR" class="img-1">
-                <img src="img/index_Pacifico.jpg" alt="UCR" class="img-2">
-            </div>
-        </section>
-        <section class="index container">
-            <div class="index_2">
-                <img src="img/UCR_Estudiante.jpg" alt="UCR" class="img-1">
-                <img src="img/presas.jpg" alt="UCR" class="img-2">
-            </div>
-            <div class="index_2">
-                <h2><span>Estadistica UCR</span></h2>
-                <p>
-                La Universidad de Costa Rica (UCR) es una de las instituciones educativas más prestigiosas y reconocidas del país. 
-                Fundada en 1940, la UCR se destaca por su compromiso con la excelencia académica, la investigación y la extensión
-                 social. Ofrece una amplia variedad de carreras y programas de posgrado, atendiendo a diversas disciplinas y 
-                 fomentando el desarrollo integral de sus estudiantes. La UCR también se caracteriza por su fuerte enfoque en la 
-                 innovación y el pensamiento crítico, así como por su activa participación en proyectos que benefician a la comunidad
-                  costarricense. Con campus en varias regiones del país, la UCR facilita el acceso a la educación superior de calidad 
-                  para una amplia población estudiantil.
+
+                <span class="card-badge">UCR</span>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="category-card" style="--color: 351, 83%, 61%">
+
+                <div class="card-icon">
+                  <img src="img/imgop3.jpg" width="40" height="40" loading="lazy"
+                    alt="Non-Degree Programs" class="img">
+                </div>
+
+                <h3 class="h3">
+                  <a href="Graficos3.html" class="card-title">Cantidad de Matrículas en cada Sede y cada año</a>
+                </h3>
+
+                <p class="card-text">
+                    escubre cómo se distribuyen las matrículas en las diferentes sedes universitarias cada año.
                 </p>
-            </div>
-        </section>
-        <section class="video container">
-            <div class="video-content">
-                <h2 class="video-title">Conociendo la UCR</h2>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/2fJWJYnnyxg?si=OVFLawppk_UCrTWZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-        </section>
-    </main>
-    <footer>
-    </footer>
-    <!-- Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <script type="text/JavaScript" src="js/helpers.js"></script>
-    <script type="text/JavaScript" src="js/general.js"></script>
+
+                <span class="card-badge">UCR</span>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="category-card" style="--color: 229, 75%, 58%">
+
+                <div class="card-icon">
+                  <img src="img/imgop7.jpg" width="40" height="40" loading="lazy"
+                    alt="Off-Campus Programs" class="img">
+                </div>
+
+                <h3 class="h3">
+                  <a href="Graficos7.html" class="card-title">Cantidad total de estudiantes matriculados por provincia</a>
+                </h3>
+
+                <p class="card-text">
+                    Explora el flujo de estudiantes que se matriculan según su provincia.
+                </p>
+
+                <span class="card-badge">UCR</span>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="category-card" style="--color: 42, 94%, 55%">
+
+                <div class="card-icon">
+                  <img src="img/imgop10.jpg" width="40" height="40" loading="lazy"
+                    alt="Hybrid Distance Programs" class="img">
+                </div>
+
+                <h3 class="h3">
+                  <a href="Graficos10.html" class="card-title">Cantidad de estudiantes que se matricularon en la carrera NO deseada por sede</a>
+                </h3>
+
+                <p class="card-text">
+                    Visualiza la cantidad total de estudiantes matriculados en la carrera que NO deseaban en cada sede del país
+                </p>
+
+                <span class="card-badge">UCR</span>
+
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+     <!-- 
+  - #VIDEO
+-->
+<section class="video has-bg-image" aria-label="video" style="margin-top: 50px;">
+    <div class="container-video">
+      <div class="video-background">
+        <div class="video-banner img-holder" style="background: none;">
+          <iframe width="1000" height="563" src="https://www.youtube.com/embed/2fJWJYnnyxg?si=OVFLawppk_UCrTWZ"
+                  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+                  encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+ 
+
+
+
+
+
+  <!-- 
+    - #BACK TO TOP
+  -->
+
+  <a href="#top" class="back-top-btn" aria-label="back top top" data-back-top-btn>
+    <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+  </a>
+
+
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="js/general.js" defer></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
+
 </html>

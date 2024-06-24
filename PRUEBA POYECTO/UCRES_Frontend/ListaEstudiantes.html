@@ -29,6 +29,7 @@
                     <h1>Lista de Estudiantes</h1>
                     <input type="text" id="searchBar" class="form-control" placeholder="Buscar por cedula o carnet" onkeyup="filtrarEstudiantes()">
                     <div class="container_Table">
+                        <button type="button" class="btn btn-primary mb-3" onclick="location.href='RegistroEstudiante.html'">Registrar Nuevo Estudiante</button>
                         <div id="seccionspinner"></div>
                         <div id="mensajes"></div>
                         <table class="">
@@ -92,7 +93,7 @@
                 <form id="formularioEditar">
                     <div class="mb-3">
                         <label for="" class="form-label">Id</label>
-                        <input type="hidden" id="idEstudiante" name="ididEstudiante">
+                        <input type="hidden" id="idEstudiante" name="idEstudiante">
                         <span id="idEditarEstudiante"></span>
                     </div>
                     <div class="mb-3">

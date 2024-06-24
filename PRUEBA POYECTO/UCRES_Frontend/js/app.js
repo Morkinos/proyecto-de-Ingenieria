@@ -58,13 +58,23 @@ const printCharts = () => {
     const urlObtenerCantEstudiantesTransladoxanio = ObtenerCantEstudiantesTransladoxanio();
     const urlObtenerCarrerasXsedes = ObtenerCarrerasXsedes();
 
-    fetchAPIData(urlEstudianteRecidenciaxanno, 'https://localhost:7192/RegistroEstudiantes/ObternerCantidadCarrerasDeseadas',
-        'https://localhost:7192/RegistroEstudiantes/AniosDisponibles', urlObternerCantMatriculasxSedexAnio,
-        urlObtenerCantEstudiantesTransladoxanio,'https://localhost:7192/Traslados/ObtenerCantEstudiantesTransladoxSede','https://localhost:7192/RegistroEstudiantes/ObternerCantMatriculasxAnio',
-        'https://localhost:7192/Traslados/CantTrasladxCarrDeseadSIYNO','https://localhost:7192/Traslados/CantEstudxCarrDeseadSixSede','https://localhost:7192/Traslados/CantEstudxCarrDeseadNoxSede',
-        'https://localhost:7192/Traslados/CantDeMatrXTransladxSede','https://localhost:7192/Sedes/SedesDisponibles',urlObtenerCarrerasXsedes )
+    fetchAPIData(urlEstudianteRecidenciaxanno, 
+        'https://localhost:7192/RegistroEstudiantes/ObternerCantidadCarrerasDeseadas',
+        'https://localhost:7192/RegistroEstudiantes/AniosDisponibles',
+        urlObternerCantMatriculasxSedexAnio,
+        urlObtenerCantEstudiantesTransladoxanio,
+        'https://localhost:7192/Traslados/ObtenerCantEstudiantesTransladoxSede',
+        'https://localhost:7192/RegistroEstudiantes/ObternerCantMatriculasxAnio',
+        'https://localhost:7192/Traslados/CantTrasladxCarrDeseadSIYNO',
+        'https://localhost:7192/Traslados/CantEstudxCarrDeseadSixSede',
+        'https://localhost:7192/Traslados/CantEstudxCarrDeseadNoxSede',
+        'https://localhost:7192/Traslados/CantDeMatrXTransladxSede',
+        'https://localhost:7192/Sedes/SedesDisponibles',
+        urlObtenerCarrerasXsedes,
+        'https://localhost:7192/Estudiantes/CantTotalEstuxProvAll' )
         .then(([EstudiantesRecidenciaxanno, carreraDeseadasCantidad, AniosDisponibles, MatrSedexAnio,CantEstTrasXAnio,CantEstTraslxSede,
-            CantidadMatrXAnios,CantTraslXCarreDesead,EstudxCarrDeseadSixSede,EstudxCarrDeseadNoxSede,MatrXTransladxSede,SedesDisp,CarrerasPorSedeYCantMatr]) => {
+            CantidadMatrXAnios,CantTraslXCarreDesead,EstudxCarrDeseadSixSede,EstudxCarrDeseadNoxSede,
+            MatrXTransladxSede,SedesDisp,CarrerasPorSedeYCantMatr,TotalEstuxProvAll]) => {
             renderMatriculaxProvinciaChart(EstudiantesRecidenciaxanno)
             renderCantidadCarrerasDeseadas(carreraDeseadasCantidad)
             renderObtenerMatriculasxSedeyAnio(MatrSedexAnio)
@@ -76,6 +86,8 @@ const printCharts = () => {
             CantEstudxCarrDeseadNoxSede(EstudxCarrDeseadNoxSede)
             CantDeMatrXTransladxSede(MatrXTransladxSede)
             MostrarCarrerasPorSedeYCantMatr(CarrerasPorSedeYCantMatr)
+            renderCantTotalEstuxProvAll(TotalEstuxProvAll)
+
            if(tittle == graficos){
             enableEventHandlers();
            }
@@ -430,6 +442,45 @@ const MostrarCarrerasPorSedeYCantMatr = (CarrerasPorSedeYCantMatr) => {
     new Chart('MostrarCarrerasPorSedeYCantMatr', { type: tipoGrafico, data, options })
 
 }
+
+
+
+const renderCantTotalEstuxProvAll = (provincias) => {
+console.log(provincias)
+const cantidad = provincias.map(provincia => provincia.cantidad);
+const ubicaciones = provincias.map(provincia => provincia.residencia);
+
+    console.log(cantidad)
+    console.log(ubicaciones)
+    const data = {
+        labels: ubicaciones,
+        datasets: [{
+            //label: year,
+            data: cantidad,
+            tension: 1,
+            borderColor: getDataColors(),
+            backgroundColor: getDataColors(60),
+            fill: true,
+            pointBorderWidth: 5
+
+        }]
+    }
+
+    const options = {
+        plugins: {
+            legend: { display: false }
+        }
+
+    }
+    const existingChart = Chart.getChart('CantTotalEstuxProvAll');
+    if (existingChart) {
+        existingChart.destroy();
+    }
+    new Chart('CantTotalEstuxProvAll', { type: tipoGrafico, data, options })
+}
+
+
+
 
 //------------------------REDIRECCIONES----------------------------------\\
 
